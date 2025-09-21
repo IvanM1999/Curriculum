@@ -10,11 +10,11 @@
 
 ## 🧭 Navegue pelos meus repositórios
 
-| 💼 Categoria | ✨ Descrição |
-|-------------|-------------|
-| 🎨 **Perfil de Apresentação** | Este repositório é meu cartão de visitas. Aqui você entende quem sou e como organizo meu trabalho. |
-| 🧪 **Projetos Pessoais** | Espaço para ideias, testes e aprendizados. Onde a criatividade encontra o código. |
-| 🚀 **Projetos Oficiais** | Projetos que estou desenvolvendo com afinco e responsabilidade. Meu foco profissional está aqui. |
+| 💼 Categoria | ✨ Descrição | 🔗 Link |
+|-------------|-------------|--------|
+| 🎨 **Perfil de Apresentação** | Meu cartão de visitas. Aqui você entende quem sou e como organizo meu trabalho. | <a href="https://github.com/IvanM1999/perfil-apresentacao" style="background-color:#1f2937;color:white;padding:6px 12px;border-radius:8px;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,0.2);">🐙 Ver Repositório</a> |
+| 🧪 **Projetos Pessoais** | Espaço para ideias, testes e aprendizados. Onde a criatividade encontra o código. | <a href="https://github.com/IvanM1999/projetos-pessoais" style="background-color:#1f2937;color:white;padding:6px 12px;border-radius:8px;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,0.2);">🧪 Ver Repositório</a> |
+| 🚀 **Projetos Oficiais** | Projetos que estou desenvolvendo com afinco e responsabilidade. | <a href="https://github.com/IvanM1999/projetos-oficiais" style="background-color:#1f2937;color:white;padding:6px 12px;border-radius:8px;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,0.2);">🚀 Ver Repositório</a> |
 
 ---
 
