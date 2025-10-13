@@ -1,7 +1,7 @@
 <h1 align="center">👋 Olá! Eu sou Ivan</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Desenvolvedor-Fullstack-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Aprendiz-Desenvolvedor-blue" />
   <img src="https://img.shields.io/badge/Organização-3%20Repositórios%20Principais-green?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Código-com%20propósito-orange?style=for-the-badge" />
 </p>
