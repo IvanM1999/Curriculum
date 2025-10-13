@@ -20,7 +20,7 @@
 
 ## 📌 Sobre mim
 
-Sou apaixonado por tecnologia, organização e propósito. Cada repositório tem uma função clara — e juntos, contam minha história como desenvolvedor.
+Sou entusiasta e apaixonado por tecnologia, organização e propósito. Cada repositório tem uma função clara — e juntos, contam minha história como desenvolvedor.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Feito%20com-💙%20e%20café-brown?style=flat-square" />
