@@ -3,59 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <title>Carta de Apresentação - Ivan Montibeller</title>
+
+  <!-- Tailwind -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Ajustes para PDF / Impressão -->
+  <style>
+    /* Força fidelidade de cores */
+    * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Configuração A4 */
+    @page {
+      size: A4;
+      margin: 2cm;
+    }
+
+    /* Corpo */
+    body {
+      background: #f3f4f6;
+    }
+
+    /* Área do documento */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: auto;
+      background: white;
+    }
+
+    /* Oculta elementos na impressão */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+
+      body {
+        background: white;
+      }
+
+      .page {
+        box-shadow: none;
+        margin: 0;
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body class="font-sans text-gray-800">
 
-  <!-- Cabeçalho -->
-  <header class="bg-gradient-to-r from-blue-700 to-green-500 text-white py-8">
-    <div class="max-w-4xl mx-auto px-6 text-center">
+  <!-- Botão de impressão -->
+  <div class="no-print max-w-4xl mx-auto mt-6 text-right">
+    <button
+      onclick="window.print()"
+      class="bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+    >
+      Imprimir / Salvar em PDF
+    </button>
+  </div>
+
+  <!-- Página A4 -->
+  <div class="page shadow-lg mt-6 p-10">
+
+    <!-- Cabeçalho -->
+    <header class="mb-8 border-b-4 border-green-500 pb-4">
       <h1 class="text-3xl font-bold">Ivan Montibeller</h1>
-      <p class="text-lg mt-1">Tecnologia, Inovação & Desenvolvimento</p>
-    </div>
-  </header>
+      <p class="text-lg text-gray-600">Tecnologia, Inovação & Desenvolvimento</p>
+    </header>
 
-  <!-- Conteúdo -->
-  <main class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-8 mt-8">
-    <h2 class="text-2xl font-bold mb-6 border-b-4 border-green-400 inline-block">
-      Carta de Apresentação
-    </h2>
+    <!-- Conteúdo -->
+    <main class="text-lg leading-relaxed">
 
-    <p class="mb-4">
-      Prezados,
-    </p>
+      <p class="mb-6">Prezados,</p>
 
-    <p class="mb-4">
-      Meu nome é Ivan Montibeller, sou estudante de Análise e Desenvolvimento de Sistemas,
-      atualmente cursando o 5º semestre pela UNIASSELVI, com formação complementar nas áreas
-      de tecnologia, eletrônica e manutenção industrial.
-    </p>
+      <p class="mb-6">
+        Meu nome é Ivan Montibeller, sou estudante de Análise e Desenvolvimento de Sistemas,
+        atualmente cursando o 5º semestre pela UNIASSELVI, com sólida formação complementar
+        nas áreas de tecnologia, eletrônica e manutenção industrial.
+      </p>
 
-    <p class="mb-4">
-      Possuo experiência no desenvolvimento de soluções web, criação de sites completos,
-      integração com WhatsApp e desenvolvimento de projetos acadêmicos voltados a banco
-      de dados e aplicações web, sempre com foco em eficiência e usabilidade.
-    </p>
+      <p class="mb-6">
+        Possuo experiência prática no desenvolvimento de soluções web, incluindo criação de
+        sites completos com foco em usabilidade, integração com WhatsApp e automação de
+        processos. Destaco, entre meus projetos, o desenvolvimento do site do
+        <em>Foodtruck Das Nascentes</em>, bem como aplicações e sistemas acadêmicos.
+      </p>
 
-    <p class="mb-4">
-      Minha vivência profissional em ambientes industriais, comerciais e tecnológicos
-      fortaleceu competências como proatividade, organização, responsabilidade e
-      comprometimento com resultados.
-    </p>
+      <p class="mb-6">
+        Minha trajetória profissional inclui atuação em ambientes industriais, logística,
+        varejo e manutenção eletrônica, o que contribuiu para o desenvolvimento de
+        competências como responsabilidade, proatividade e visão sistêmica.
+      </p>
 
-    <p class="mb-6">
-      Coloco-me à disposição para contribuir com soluções tecnológicas e aprendizado contínuo,
-      alinhando minhas habilidades às necessidades da organização.
-    </p>
+      <p class="mb-10">
+        Coloco-me à disposição para contribuir com soluções tecnológicas eficientes,
+        aprendizado contínuo e comprometimento com resultados.
+      </p>
 
-    <p class="mt-8">
-      Atenciosamente,<br>
-      <strong>Ivan Montibeller</strong><br>
-      E-mail: ivan.m301299@outlook.com<br>
-      WhatsApp: (47) 98486-3051
-    </p>
-  </main>
+      <p>
+        Atenciosamente,<br>
+        <strong>Ivan Montibeller</strong><br>
+        Tecnologia, Inovação & Desenvolvimento<br>
+        E-mail: ivan.m301299@outlook.com<br>
+        WhatsApp: (47) 98486-3051
+      </p>
+
+    </main>
+  </div>
 
 </body>
 </html>
