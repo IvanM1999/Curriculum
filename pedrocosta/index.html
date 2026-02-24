@@ -27,7 +27,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px;
+      padding: 16px;
     }
 
     .card {
@@ -40,6 +40,12 @@
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
       overflow: hidden;
+    }
+
+    @media (max-width: 1024px) {
+      .card {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+      }
     }
 
     @media (max-width: 768px) {
@@ -62,6 +68,32 @@
       gap: 24px;
     }
 
+    @media (max-width: 768px) {
+      .lado-esquerdo {
+        padding: 24px 20px 20px;
+      }
+
+      .lado-direito {
+        padding: 24px 20px;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+
+      .lado-esquerdo {
+        padding: 20px 16px 16px;
+      }
+
+      .lado-direito {
+        padding: 20px 16px;
+        gap: 16px;
+      }
+    }
+
     .logo-nome {
       display: flex;
       align-items: center;
@@ -72,8 +104,6 @@
     .logo-icone {
       width: 52px;
       height: 52px;
-      border-radius: 14px;
-      background: radial-gradient(circle at 20% 20%, #00e6a0, #007a57);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -83,6 +113,12 @@
       width: 30px;
       height: 30px;
       fill: var(--branco);
+    }
+
+    .logo-icone img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
     }
 
     .logo-texto h1 {
@@ -96,6 +132,57 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .logo-nome {
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .logo-icone {
+        width: 48px;
+        height: 48px;
+      }
+
+      .logo-icone img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .logo-texto h1 {
+        font-size: 1.2rem;
+      }
+
+      .logo-texto span {
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-nome {
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .logo-icone {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+      }
+
+      .logo-icone img {
+        width: 44px;
+        height: 44px;
+      }
+
+      .logo-texto h1 {
+        font-size: 1.1rem;
+      }
+
+      .logo-texto span {
+        font-size: 0.7rem;
+      }
     }
 
     .selo {
@@ -137,6 +224,42 @@
       margin-bottom: 24px;
     }
 
+    @media (max-width: 768px) {
+      .headline {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+      }
+
+      .subheadline {
+        font-size: 0.9rem;
+        margin-bottom: 18px;
+      }
+
+      .lista-servicos {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .headline {
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+      }
+
+      .subheadline {
+        font-size: 0.85rem;
+        margin-bottom: 16px;
+      }
+
+      .lista-servicos {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+    }
+
     .servico {
       display: flex;
       align-items: flex-start;
@@ -174,6 +297,21 @@
       color: #666;
     }
 
+    @media (max-width: 480px) {
+      .servico {
+        padding: 8px 8px;
+        gap: 8px;
+      }
+
+      .servico-texto strong {
+        font-size: 0.85rem;
+      }
+
+      .servico-texto span {
+        font-size: 0.75rem;
+      }
+    }
+
     .rodape-esquerdo {
       display: flex;
       justify-content: space-between;
@@ -189,6 +327,26 @@
 
     .rodape-esquerdo strong {
       color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .rodape-esquerdo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .rodape-esquerdo {
+        gap: 8px;
+        font-size: 0.7rem;
+      }
+
+      .rodape-esquerdo small {
+        line-height: 1.3;
+      }
     }
 
     .lado-direito h2 {
@@ -223,6 +381,49 @@
       fill: #00e676;
     }
 
+    @media (max-width: 768px) {
+      .lado-direito h2 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      .lado-direito p {
+        font-size: 0.85rem;
+      }
+
+      .contato-bloco {
+        margin-top: 8px;
+        gap: 6px;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .lado-direito h2 {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+      }
+
+      .lado-direito p {
+        font-size: 0.8rem;
+      }
+
+      .contato-bloco {
+        margin-top: 6px;
+        gap: 6px;
+        font-size: 0.8rem;
+      }
+
+      .contato-item {
+        gap: 6px;
+      }
+
+      .contato-item svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
     .botao-whats {
       margin-top: 18px;
       display: inline-flex;
@@ -253,6 +454,34 @@
       fill: #05301a;
     }
 
+    @media (max-width: 768px) {
+      .botao-whats {
+        margin-top: 14px;
+        padding: 9px 14px;
+        font-size: 0.85rem;
+      }
+
+      .botao-whats svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .botao-whats {
+        margin-top: 12px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .botao-whats svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+
     .disponibilidade {
       font-size: 0.8rem;
       color: #aeb5c0;
@@ -263,6 +492,28 @@
       font-size: 0.8rem;
       color: #aeb5c0;
     }
+
+    @media (max-width: 768px) {
+      .disponibilidade {
+        font-size: 0.75rem;
+        margin-top: 8px;
+      }
+
+      .regiao {
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .disponibilidade {
+        font-size: 0.7rem;
+        margin-top: 6px;
+      }
+
+      .regiao {
+        font-size: 0.7rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -272,10 +523,7 @@
       <div class="logo-nome">
         <div class="logo-icone" aria-hidden="true">
           <!-- Ícone de ferramentas -->
-          <svg viewBox="0 0 24 24">
-            <path d="M21.7 13.35 19 10.66a1 1 0 0 0-1.41 0l-1.72 1.72-3.25-3.25 1.72-1.72a1 1 0 0 0 0-1.41L11.66 3.3a1 1 0 0 0-1.41 0L8.53 5 7.11 4.93 4.22 7.82l2.12 2.12-3.6 3.6a1 1 0 0 0 0 1.41l2.53 2.53a1 1 0 0 0 1.41 0l3.6-3.6 2.12 2.12 2.89-2.89-.07-1.42 1.72-1.72 2.69 2.69a.5.5 0 0 0 .85-.35v-1.96a1 1 0 0 0-.29-.71Z" />
-          </svg>
-        </div>
+          <img src="src/img/logo-pedro.png" alt="Ícone de ferramentas">        </div>
         <div class="logo-texto">
           <h1>Pedro Costa Brum</h1>
           <span>Serviços de Manutenção Geral & Reformas</span>
@@ -292,7 +540,7 @@
 
       <h2 class="headline">Pequenos reparos, grandes soluções.</h2>
       <p class="subheadline">
-        Manutenção geral, reformas e aquele “quebra-galho” que você precisa em casa ou no seu negócio—
+        Manutenção geral, reformas e aquele serviço que você precisa em casa ou no seu negócio —
         com pontualidade, capricho e confiança.
       </p>
 
@@ -306,7 +554,7 @@
           </div>
           <div class="servico-texto">
             <strong>Elétrica básica</strong>
-            <span>Troca de tomadas, interruptores, luminárias e pequenos ajustes.</span>
+            <span>Troca de tomadas, chuveiros, luminárias, sensores e mais.</span>
           </div>
         </article>
 
@@ -332,7 +580,7 @@
           </div>
           <div class="servico-texto">
             <strong>Instalações e fixações</strong>
-            <span>Prateleiras, suportes de TV, quadros, varões de cortina e mais.</span>
+            <span>Prateleiras, suportes de TV, quadros, varões de cortina e variadas instalações.</span>
           </div>
         </article>
 
@@ -345,7 +593,7 @@
           </div>
           <div class="servico-texto">
             <strong>Pequenas reformas</strong>
-            <span>Acabamentos, ajustes em portas, rodapés, rejuntes e reparos gerais.</span>
+            <span>Acabamentos, pisos, ajustes em portas, rodapés, rejuntes e reparos gerais.</span>
           </div>
         </article>
       </div>
@@ -353,11 +601,11 @@
       <div class="rodape-esquerdo">
         <small>
           <strong>Atendimento sob agendamento</strong><br />
-          Orçamentos rápidos por WhatsApp, com fotos ou vídeo.
+          Orçamentos rápidos por WhatsApp, mande fotos ou vídeo.
         </small>
         <small>
           CNPJ/MEI disponível<br />
-          Nota para serviços sob consulta.
+          Nota Fiscal sob consulta.
         </small>
       </div>
     </section>
