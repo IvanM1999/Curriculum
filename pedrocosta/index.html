@@ -514,6 +514,64 @@
         font-size: 0.7rem;
       }
     }
+
+    .botao-download {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .botao-download a {
+      text-decoration: none;
+      display: flex;
+    }
+
+    .botao-destaque {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 2px solid #00b894;
+      background: transparent;
+      color: #00b894;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .botao-destaque:hover {
+      background: #00b894;
+      color: var(--branco);
+      box-shadow: 0 8px 20px rgba(0, 184, 148, 0.3);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .botao-download {
+        margin-top: 14px;
+      }
+
+      .botao-destaque {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .botao-download {
+        margin-top: 12px;
+      }
+
+      .botao-destaque {
+        padding: 9px 16px;
+        font-size: 0.85rem;
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -653,6 +711,12 @@
         <p class="disponibilidade">
           Segunda a sábado, horário a combinar. Atendimentos emergenciais sob consulta.
         </p>
+      </div>
+
+      <div class="botao-download">
+        <a href="src/img/cartao-visita.png" download="cartao-visita.png" class="botao-destaque">
+          Baixar Cartão de Visita
+        </a>
       </div>
 
       <div class="regiao">
