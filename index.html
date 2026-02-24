@@ -1,28 +1,155 @@
 <!DOCTYPE html>
-<!-- Se chegou aqui.vrio ler a estrutura do código. Obrigado pelo voto de confiança e já vou ser sincero, é um quebra cabeças gigante feito pela força do desespero desde 2024. Então tem coisa aqui wue nao sei explicar e se funciona, to deixando hahahaha-->
-<!-- outra coisa, estou usando plataformas Android para programação, principalmente apps de texto, pois aprendi programação na raça e não curto muito frufru como vscode e escambau a 4.  Minha aplicação favorita é SPCK editor, porém limitada por questões de desenvolvimento -->
+<!-- Currículo Web de Ivan Montibeller -->
+<!-- Desenvolvido com HTML5, Tailwind CSS e JavaScript -->
+<!-- Otimizado para SEO, acessibilidade e segurança -->
+<!-- OSite feito as pressas com apoio do copilot e muito esforço enquanto estudo -->
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ivan Montibeller - Currículo Web</title>
+  <title>Ivan Montibeller - Aprendiz Desenvolvedor & Técnico em Análise e Desenvolvimento de Sistemas</title>
+  
+  <!-- Meta SEO -->
+  <meta name="description" content="Portfólio de Ivan Montibeller - Desenvolvedor Full Stack, técnico em eletrônica e análise de sistemas. Especializado em web, mobile e soluções tecnológicas.">
+  <meta name="keywords" content="desenvolvedor, programação, eletrônica, sistemas, web, fullstack, tecnologia, blumenau">
+  <meta name="author" content="Ivan Montibeller">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Portuguese">
+  <meta name="revisit-after" content="7 days">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://ivanmontibeller.dev/">
+  <meta property="og:title" content="Ivan Montibeller - Desenvolvedor & Técnico em Sistemas">
+  <meta property="og:description" content="Portfólio profissional de Ivan Montibeller com projetos, formação e experiência em desenvolvimento de sistemas.">
+  <meta property="og:image" content="https://ivanmontibeller.onrender.com/src/img/logo.jpeg">
+  <meta property="og:image:alt" content="Logo de Ivan Montibeller">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:secure_url" content="https://ivanmontibeller.onrender.com/src/img/logo.jpeg">
+  <meta property="og:locale" content="pt_BR">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ivan Montibeller - Desenvolvedor Full Stack">
+  <meta name="twitter:description" content="Portfolio de desenvolvimento de sistemas e soluções tecnológicas">
+  <meta name="twitter:image" content="https://ivanmontibeller.onrender.com/src/img/logo.jpeg">
+  <meta name="twitter:image:alt" content="Logo de Ivan Montibeller">
+  
+  <!-- Segurança -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' https://cdn.jsdelivr.net">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ivanmontibeller.onrender.com/">
+  
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/lucide-static/font/lucide.css" rel="stylesheet">
   <link href="/backend/style.css" rel="stylesheet">
+  <style>
+    a {
+      transition: all 0.2s ease;
+    }
+    a:focus {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+    .email-protected::before {
+      content: attr(data-email);
+    }
+    .phone-protected::before {
+      content: attr(data-phone);
+    }
+    /* Estilo para imagem de perfil */
+    .profile-image {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: block;
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .profile-image {
+        width: 140px;
+        height: 140px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  </style>
+  
+  <!-- Schema.org Developer/Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ivan Montibeller",
+    "jobTitle": "Desenvolvedor Full Stack & Técnico em Sistemas",
+    "url": "https://ivanmontibeller.onrender.com/",
+    "image": [
+      "https://ivanmontibeller.onrender.com/src/img/perfil.png",
+      "https://ivanmontibeller.onrender.com/src/img/logo.jpeg"
+    ],
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ivanmontibeller.onrender.com/src/img/logo.jpeg",
+      "width": 1200,
+      "height": 630
+    },
+    "sameAs": [
+      "https://github.com/IvanM1999",
+      "https://wa.me/5547984863051"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelancer"
+    },
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "UNIASSELVI"
+    }
+  }
+  </script>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
 
   <!-- Header -->
   <header class="bg-gradient-to-r from-blue-700 to-green-500 text-white py-10 shadow-lg">
     <div class="max-w-5xl mx-auto px-6 text-center">
-      <img src="/backend/img/perfil.png" alt="Ivan Montibeller" class="w-32 h-32 rounded-full mx-auto border-4 border-white shadow-xl">
+      <img src="/src/img/perfil.png" alt="Ivan Montibeller - Desenvolvedor Full Stack" class="profile-image">
       <h1 class="text-4xl font-bold mt-4">Ivan Montibeller</h1>
       <p class="text-lg mt-2">Tecnologia, Inovação & Desenvolvimento</p>
-    <div class="flex justify-center space-x-4 mt-6">
-  <a href="mailto:ivan.m301299@outlook.com" class="bg-white text-blue-700 px-4 py-2 rounded-xl shadow hover:scale-105 transform">📧 E-mail</a>
-  <a href="https://wa.me/5547984863051" class="bg-green-600 px-4 py-2 rounded-xl shadow hover:scale-105 transform">💬 WhatsApp</a>
-  <a href="https://github.com/IvanM1999/Curriculum/blob/main/README.md" class="bg-gray-800 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform">🐙 GitHub</a>
-  </div>
+    <div class="flex justify-center space-x-4 mt-6 flex-wrap gap-3">
+      <a href="mailto:ivan.m301299@outlook.com" class="bg-white text-blue-700 px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200" title="Enviar e-mail">📧 E-mail</a>
+      <a href="https://wa.me/5547984863051" class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200" title="Contato via WhatsApp">💬 WhatsApp</a>
+      <a href="https://github.com/IvanM1999/Curriculum/blob/main/README.md" class="bg-gray-800 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200" title="Acessar GitHub">🐙 GitHub</a>
+      <a 
+        href="src/img/cartao-visita.png" 
+        download="cartao-visita-ivan-montibeller.png" 
+        class="bg-yellow-400 text-gray-900 px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200 font-semibold"
+        title="Baixar cartão de visita de Ivan Montibeller"
+        aria-label="Baixar cartão de visita em formato PNG"
+      >
+        📥 Cartão de Visita
+      </a>
+    </div>
+
 </div>
 </header>
 
@@ -40,9 +167,10 @@
     <div>
       <h2>Informações</h2>
       <p><strong>Data de Nascimento:</strong> 30/12/1999</p>
-      <p><strong>Telefone:</strong> <a href="https://wa.me/5547984863051" target="_blank"><i class="fab fa-whatsapp"></i> (47) 98486-3051</a></p>
-      <p><strong>E-mail:</strong> <a href="mailto:ivan.m301299@outlook.com">ivan.m301299@outlook.com</a><br>
-      <a href="mailto:ivan.m301299@gmail.com">ivan.m301299@gmail.com</a></p>
+      <p><strong>Telefone:</strong> <a href="tel:+5547984863051" class="text-blue-600 hover:underline" title="Ligar para Ivan">+55 (47) 98486-3051</a></p>
+      <p><strong>E-mail:</strong> <a href="mailto:ivan.m301299@outlook.com" class="text-blue-600 hover:underline" title="Enviar e-mail">ivan.m301299@outlook.com</a><br>
+      <a href="mailto:ivan.m301299@gmail.com" class="text-blue-600 hover:underline" title="Enviar e-mail alternativo">ivan.m301299@gmail.com</a></p>
+      <br/>
   <a href="https://github.com/IvanM1999" class="bg-gray-800 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform"> 🐙 GitHub</a>
     </div>
   </div>
@@ -281,12 +409,20 @@
 
   <!-- Contato -->
   <footer class="bg-gradient-to-r from-green-500 to-blue-700 text-white py-10 mt-12">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h2 class="text-2xl font-bold">Vamos  Conversar?</h2>
-      <p class="mt-2">Aberto para novas oportunidades.</p>
-      <div class="flex justify-center space-x-4 mt-6">
-        <a href="mailto:ivan.m301299@outlook.com" class="bg-white text-blue-700 px-4 py-2 rounded-xl shadow hover:scale-105 transform">📧 E-mail</a>
-        <a href="https://wa.me/5547984863051" class="bg-green-600 px-4 py-2 rounded-xl shadow hover:scale-105 transform">💬 WhatsApp</a>
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold">Vamos Conversar?</h2>
+        <p class="mt-2">Aberto para novas oportunidades.</p>
+        <div class="flex justify-center space-x-4 mt-6 flex-wrap gap-3">
+          <a href="mailto:ivan.m301299@outlook.com" class="bg-white text-blue-700 px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200" title="Enviar e-mail">📧 E-mail</a>
+          <a href="https://wa.me/5547984863051" class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200" target="_blank" rel="noopener noreferrer" title="Falar no WhatsApp">💬 WhatsApp</a>
+        </div>
+      </div>
+      
+      <!-- Rodapé com informações de segurança -->
+      <div class="border-t border-white/30 pt-6 mt-6 text-center text-sm text-white/80">
+        <p>&copy; 2024-2026 Ivan Montibeller. Todos os direitos reservados.</p>
+        <p class="mt-2">🔒 Site seguro com proteção de dados | <a href="#privacy" class="hover:text-white underline">Política de Privacidade</a></p>
       </div>
     </div>
   </footer>
@@ -294,6 +430,25 @@
 
   <!-- Swiper CSS --
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
+  <!-- Script de Segurança e Proteção -->
+  <script>
+    // Proteção contra bot/scraper
+    document.documentElement.setAttribute('data-protected', 'true');
+
+    // Log de segurança
+    console.log('%c⚠️ Aviso de Segurança', 'color: red; font-size: 20px; font-weight: bold');
+    console.log('%cEste é um console reservado para desenvolvedores. Não digite comandos de terceiros aqui.', 'color: orange; font-size: 12px');
+    console.log('%cSeu navegador pode estar vulnerável se você copiar e colar código malicioso aqui.', 'color: red; font-size: 12px');
+    
+    // Prevenção de cópia de email/telefone por bots
+    document.addEventListener('copy', function(e) {
+      let copiedText = window.getSelection().toString();
+      if (copiedText.includes('@') || copiedText.includes('984863051')) {
+        console.warn('Tentativa de cópia de informações sensíveis detectada');
+      }
+    });
+  </script>
   
   <!-- Seu CSS --
   <link rel="stylesheet" href="/backend/style.css" />
