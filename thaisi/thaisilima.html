@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Currículo – Thaisi Correia Lima</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+:root {
+  --pink-main: #ff4da6;
+  --pink-soft: #ffc1e3;
+  --pink-dark: #cc007a;
+  --bg: linear-gradient(135deg, #fff0f7, #ffe4f1);
+  --card: rgba(255,255,255,0.75);
+  --text: #2b2b2b;
+  --muted: #666;
+}
+
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* BODY */
+body {
+  font-family: "Segoe UI", system-ui;
+  background: var(--bg);
+  color: var(--text);
+  padding: 24px;
+}
+
+/* PAGE */
+.page {
+  max-width: 900px;
+  margin: auto;
+  padding: 32px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  background: var(--card);
+  box-shadow: 0 20px 60px rgba(255, 0, 128, 0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+/* HEADER */
+header {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  align-items: center;
+  border-bottom: 2px solid rgba(255,77,166,0.2);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+/* FOTO */
+.photo {
+  width: 120px;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid var(--pink-main);
+  box-shadow: 0 0 20px rgba(255,77,166,0.4);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* HEADLINE */
+.headline h1 {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--pink-dark);
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255,77,166,0.3);
+}
+
+.role {
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.contact {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* SECTIONS */
+.section {
+  margin-top: 20px;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--pink-dark);
+  font-weight: bold;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pink-main), transparent);
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
+/* TEXT */
+.objective {
+  font-size: 0.95rem;
+}
+
+/* ITEMS */
+.item {
+  margin-bottom: 12px;
+}
+
+.item-title {
+  font-weight: 600;
+}
+
+.item-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.item-time {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.item ul {
+  padding-left: 18px;
+  font-size: 0.9rem;
+}
+
+/* PILLS */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pill {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: linear-gradient(135deg, #fff, #ffe0f0);
+  border: 1px solid rgba(255,77,166,0.3);
+  box-shadow: 0 0 10px rgba(255,77,166,0.2);
+  transition: 0.3s;
+}
+
+.pill:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255,77,166,0.4);
+}
+
+/* PRINT BUTTON */
+.print-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 18px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255,0,128,0.4);
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.print-btn:hover {
+  transform: scale(1.1);
+}
+
+/* RESPONSIVO */
+@media (max-width: 720px) {
+  header {
+    grid-template-columns: 90px 1fr;
+  }
+}
+
+/* PRINT */
+@media print {
+  body {
+    background: white;
+  }
+  .print-btn {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+
+<main class="page">
+
+<header>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; padding: 20px; background: #f5f5f5; font-family: Arial, sans-serif;">
+  
+  <!-- Foto -->
+  <div style="flex: 0 0 150px; max-width: 150px;">
+    <img 
+      src="./thaisi.jpeg" 
+      style="width: 100%; height: auto; border-radius: 50%; object-fit: cover; aspect-ratio: 1; border: 3px solid #4a6fa5;" 
+      alt="Foto de Thaisi Correia Lima"
+    />
+  </div>
+
+  <!-- Conteúdo -->
+  <div style="flex: 1; min-width: 250px;">
+    <h1 style="margin: 0 0 10px 0; color: #2c3e50; font-size: 28px;">Thaisi Correia Lima</h1>
+    
+    <div style="font-size: 18px; color: #4a6fa5; font-weight: bold; margin-bottom: 8px;">
+      Professora • Educação • Pedagogia
+    </div>
+    
+    <div style="font-size: 16px; color: #555; padding-top: 8px; border-top: 2px solid #ddd;">
+      📱 (13) 98138-7217 • ✉️ thaisi_limaftn@yahoo.com.br
+    </div>
+  </div>
+
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; padding: 20px; background: #f5f5f5; font-family: Arial, sans-serif; max-width: 100%; box-sizing: border-box;">
+
+</header>
+
+<section class="section">
+  <h2 class="section-title">Objetivo</h2>
+  <p class="objective">
+    Atuar na área pedagógica com foco no desenvolvimento educacional, inclusão e formação integral dos alunos.
+  </p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Formação</h2>
+  <div class="item">
+    <div class="item-title">Pedagogia (em andamento)</div>
+    <div class="item-sub">Unisanta – conclusão 2027</div>
+  </div>
+</section>
+
+    <section class="section">
+      <h2 class="section-title">Objetivo</h2>
+      <p>
+        Procuro uma oportunidade para assumir novos desafios, aprimorar habilidades, desenvolver novas competências e contribuir para o crescimento da empresa.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Formação Acadêmica</h2>
+
+      <div class="item">
+        <div class="item-title">Curso Técnico em Secretariado</div>
+        <div class="item-sub">ETEC Dona Escolástica Rosa – Santos</div>
+        <div class="item-time">Concluído em 2010</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Cursos Complementares</h2>
+
+      <div class="item">
+        <div class="item-title">Projetista CAD</div>
+        <div class="item-sub">Evolute Cursos Profissionalizantes</div>
+        <div class="item-time">2015</div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Inglês – Conversação</div>
+        <div class="item-sub">Help Informática</div>
+        <div class="item-time">2012</div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Informática – Curso Básico</div>
+        <div class="item-sub">Datta Billy Informática</div>
+        <div class="item-time">2009</div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Recepcionista / Assistente Administrativo</div>
+        <div class="item-sub">ETEC Dona Escolástica Rosa</div>
+        <div class="item-time">2009</div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Assistente de Eventos Empresariais</div>
+        <div class="item-sub">ETEC Dona Escolástica Rosa</div>
+        <div class="item-time">2009</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Experiência Profissional</h2>
+
+      <div class="item">
+        <div class="item-title">Auxiliar de Classe</div>
+        <div class="item-sub">Associação de Amor à Criança Arcanjo Rafael – Santos</div>
+        <div class="item-time">Nov 2024 – Mar 2025</div>
+        <ul>
+          <li>Atuação em oficina de Linguagem e Comunicação Artística.</li>
+          <li>Apoio pedagógico e organização de materiais.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Atendente de Educação</div>
+        <div class="item-sub">Instituto IGEVE – São Vicente</div>
+        <div class="item-time">Out 2019 – Out 2024</div>
+        <ul>
+          <li>Monitoramento de entrada e saída dos alunos.</li>
+          <li>Apoio na alimentação, higiene e rotina escolar.</li>
+          <li>Suporte pedagógico e inclusão.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Balconista / Vendas</div>
+        <div class="item-sub">Loja Estrela D’Água – Tamanhos Grandes</div>
+        <div class="item-time">Jan 2013 – Jul 2013</div>
+        <ul>
+          <li>Atendimento ao cliente e vendas.</li>
+          <li>Organização de estoque e manequins.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-title">Teleoperadora Receptiva</div>
+        <div class="item-sub">Atento Brasil S/A – Santos</div>
+        <div class="item-time">Set 2011 – Mai 2012</div>
+        <ul>
+          <li>Atendimento e suporte via telefone e chat.</li>
+          <li>Vendas e resolução de problemas.</li>
+        </ul>
+      </div>
+
+    </section>
+
+
+</main>
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir</button>
+
+</body>
+</html>
