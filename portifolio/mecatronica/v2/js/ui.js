@@ -1,32 +1,43 @@
+// ===== RENDER =====
 export const UI = {
-   question(text) {
-      document.getElementById("question").innerText = text;
-   },
-   
-   feedback(text, type) {
-      const el = document.getElementById("feedback");
-      el.innerHTML = text;
-      el.className = type === "ok" ? "feedback-ok" : "feedback-err";
-   },
-   
-   stats({ acc, total, correct }) {
-      document.getElementById("acc").innerText = acc + "%";
-      document.getElementById("total").innerText = total;
-      document.getElementById("correct").innerText = correct;
-   },
-   
-   animateCard(ok) {
-      const card = document.getElementById("exerciseCard");
-      if (!card) return;
-      
-      card.classList.remove("success", "error");
-      
-      setTimeout(() => {
-         card.classList.add(ok ? "success" : "error");
-      }, 10);
-   },
-   
-   clearInput(id) {
-      document.getElementById(id).value = "";
-   }
+  mount(id, html) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  }
 };
+
+// ===== COMPONENTES =====
+
+// CARD
+export const Card = (title, content) => `
+  <div class="card">
+    ${title ? `<div class="title">${title}</div>` : ""}
+    ${content}
+  </div>
+`;
+
+// BOTÃO
+export const Button = (text, action, type = "primary") => `
+  <button class="btn btn-${type}" onclick="${action}">
+    ${text}
+  </button>
+`;
+
+// INPUT
+export const Input = (id, placeholder) => `
+  <input id="${id}" class="input" placeholder="${placeholder}">
+`;
+
+// FEEDBACK
+export const Feedback = (msg, type) => `
+  <div class="feedback-${type}">
+    ${msg}
+  </div>
+`;
+
+// PROGRESS
+export const ProgressBar = (value) => `
+  <div class="progress-bar">
+    <div class="progress-fill" style="width:${value}%"></div>
+  </div>
+`;
