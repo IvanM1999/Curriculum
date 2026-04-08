@@ -7,13 +7,21 @@ const state = {
 
 function showResult(result) {
    
+   const output = document.getElementById("output");
+   
    if (!result || result.error) {
-      document.getElementById("output").innerText = "Erro no circuito";
+      output.innerText = "Erro no circuito";
       return;
    }
    
-   document.getElementById("output").innerText =
-      JSON.stringify(result.nodes, null, 2);
+   // FORMATAÇÃO MAIS DIDÁTICA
+   let text = "";
+   
+   for (let node in result.nodes) {
+      text += `${node} = ${result.nodes[node].toFixed(2)} V\n`;
+   }
+   
+   output.innerText = text;
 }
 
 function showSteps(result) {
@@ -25,17 +33,37 @@ function showSteps(result) {
    let html = "<div class='title'>Passo a passo</div>";
    
    result.steps.forEach((s, i) => {
-      html += `<p><b>Etapa ${i+1}:</b> ${s}</p>`;
+      
+      html += `
+      <div class="step">
+        <b>Etapa ${i+1}</b>
+        <p>${highlightMath(s)}</p>
+      </div>
+    `;
    });
    
    div.innerHTML = html;
 }
 
+// DESTACA EXPRESSÕES (didático)
+function highlightMath(text) {
+   return text
+      .replace(/V\([^)]+\)/g, '<span class="var">$&</span>')
+      .replace(/\d+(\.\d+)?/g, '<span class="num">$&</span>');
+}
+
 window.resolver = () => {
    
-   const text = document.getElementById("input").value;
+   const text = document.getElementById("input").value.trim();
+   
+   if (!text) {
+      document.getElementById("output").innerText =
+         "Digite um circuito para analisar";
+      return;
+   }
    
    try {
+      
       const parsed = parseCircuit(text);
       const result = solveNodalWithSteps(parsed);
       
@@ -43,9 +71,15 @@ window.resolver = () => {
       
       showResult(result);
       
+      // limpa passos ao recalcular
+      document.getElementById("steps").style.display = "none";
+      
    } catch (e) {
+      
       document.getElementById("output").innerText =
          "Erro ao processar circuito";
+      
+      console.error("Erro detalhado:", e);
    }
 };
 
@@ -53,7 +87,10 @@ window.toggleSteps = () => {
    
    const div = document.getElementById("steps");
    
-   if (!state.lastResult) return;
+   if (!state.lastResult) {
+      div.innerHTML = "Resolva o circuito primeiro";
+      return;
+   }
    
    const visible = div.style.display === "block";
    

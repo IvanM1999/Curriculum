@@ -8,15 +8,43 @@ const App = {
    current: null,
    
    newExercise() {
-      const ex = Exercises[Math.floor(Math.random() * Exercises.length)];
-      this.current = ex.generate();
       
-      UI.question(this.current.question);
+import { getAdaptiveExercise } from './exercises.js';
+
+this.current = getAdaptiveExercise(Progress, Exercises);
+
+UI.question(this.current.question);
       UI.feedback("", "");
+      UI.clearInput?.("answer");
+      
+      // foco automático
+      document.getElementById("answer")?.focus();
    },
    
    check() {
-      const user = parseFloat(document.getElementById("answer").value);
+      
+      // proteção
+      if (!this.current) {
+         UI.feedback("Gere um exercício primeiro", "err");
+         return;
+      }
+      
+      const inputEl = document.getElementById("answer");
+      const raw = inputEl.value;
+      
+      // validação
+      if (!raw) {
+         UI.feedback("Digite uma resposta", "err");
+         return;
+      }
+      
+      const user = parseFloat(raw);
+      
+      if (isNaN(user)) {
+         UI.feedback("Valor inválido", "err");
+         return;
+      }
+      
       const correct = this.current.solve(Engine);
       
       const ok = Math.abs(user - correct) < 0.1;
@@ -25,8 +53,18 @@ const App = {
       
       if (ok) {
          UI.feedback("✔ Correto!", "ok");
+         
+         // preparação futura (modo desafio)
+         if (window.Challenge?.active) {
+            window.Challenge.hit();
+            setTimeout(() => this.newExercise(), 300);
+         }
+         
       } else {
-         UI.feedback(`✖ Errado<br>${this.current.formula}`, "err");
+         UI.feedback(
+            `✖ Errado<br>${this.current.formula}`,
+            "err"
+         );
       }
       
       UI.animateCard(ok);
@@ -34,6 +72,7 @@ const App = {
    },
    
    updateStats() {
+      
       const p = Progress.load();
       
       UI.stats({
@@ -45,7 +84,14 @@ const App = {
    
 };
 
+// EVENTOS
 window.newExercise = () => App.newExercise();
 window.check = () => App.check();
 
+// ENTER = responder
+document.getElementById("answer")?.addEventListener("keydown", e => {
+   if (e.key === "Enter") App.check();
+});
+
+// INIT
 App.updateStats();
