@@ -1,0 +1,53 @@
+<h2>Análise de Circuito</h2>
+
+<textarea id="input" rows="6" style="width:100%;">
+V1=10 entre n1 e gnd
+R1=5 entre n1 e n2
+R2=5 entre n2 e gnd
+</textarea>
+
+<br><br>
+
+<button onclick="resolver()">Resolver</button>
+<button onclick="toggleSteps()">Modo Professor</button>
+
+<h3>Resultado</h3>
+<pre id="output"></pre>
+
+<h3>Passo a Passo</h3>
+<div id="steps" style="display:none;"></div>
+
+<script>import { parseCircuit } from './js/parser.js';
+import { solveNodalWithSteps } from './js/engine.js';
+
+let lastResult = null;
+
+window.resolver = () => {
+
+const text = document.getElementById("input").value;
+
+const parsed = parseCircuit(text);
+const result = solveNodalWithSteps(parsed);
+
+lastResult = result;
+
+document.getElementById("output").innerText =
+JSON.stringify(result.nodes, null, 2);
+};
+
+window.toggleSteps = () => {
+
+const div = document.getElementById("steps");
+
+if (!lastResult) return;
+
+div.style.display = div.style.display === "none" ? "block" : "none";
+
+let html = "";
+
+lastResult.steps.forEach((s, i) => {
+html += `<p><b>Etapa ${i+1}:</b> ${s}</p>`;
+});
+
+div.innerHTML = html;
+};</script>

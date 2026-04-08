@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Treino</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">CircuitLab</div>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="treino.html">Treino</a>
+    <a href="analise.html">Análise</a>
+  </nav>
+</header>
+
+<main class="container">
+
+<h1>Treinamento</h1>
+
+<div class="grid grid-2">
+
+  <!-- EXERCÍCIO -->
+  <div class="card">
+    <div class="title">Exercício</div>
+
+    <p id="question">Clique em novo exercício</p>
+
+    <input id="answer" class="input" placeholder="Resposta">
+
+    <button class="btn" onclick="check()">Verificar</button>
+    <button class="btn" onclick="newExercise()">Novo</button>
+
+    <div id="feedback"></div>
+  </div>
+
+  <!-- STATUS -->
+  <div class="card">
+    <div class="title">Seu Desempenho</div>
+
+    <p>Aproveitamento:</p>
+    <h2 id="acc">0%</h2>
+
+    <p>Total:</p>
+    <span id="total"></span>
+
+    <p>Acertos:</p>
+    <span id="correct"></span>
+  </div>
+
+</div>
+
+</main>
+
+<script type="module">
+import { Engine } from './js/engine.js';
+import { Exercises } from './js/exercises.js';
+import { Progress } from './js/progress.js';
+
+let current;
+
+window.newExercise = () => {
+  const ex = Exercises[Math.floor(Math.random()*Exercises.length)];
+  current = ex.generate();
+
+  document.getElementById("question").innerText = current.question;
+  document.getElementById("feedback").innerHTML = "";
+};
+
+window.check = () => {
+  const user = parseFloat(document.getElementById("answer").value);
+
+  const correct = current.solve(Engine);
+
+  const ok = Math.abs(user - correct) < 0.1;
+
+  Progress.update(current.type, ok);
+
+  document.getElementById("feedback").innerHTML =
+    ok
+    ? "<span class='feedback-ok'>✔ Correto</span>"
+    : `<span class='feedback-err'>✖ Errado<br>${current.formula}</span>`;
+
+  updateStats();
+};
+
+function updateStats() {
+  const p = Progress.load();
+
+  document.getElementById("acc").innerText =
+    Progress.accuracy() + "%";
+
+  document.getElementById("total").innerText = p.total;
+  document.getElementById("correct").innerText = p.correct;
+}
+
+updateStats();
+</script>
+
+</body>
+</html>

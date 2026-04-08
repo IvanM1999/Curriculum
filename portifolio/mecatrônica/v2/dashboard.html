@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">CircuitLab</div>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="treino.html">Treino</a>
+    <a href="analise.html">Análise</a>
+  </nav>
+</header>
+
+<main class="container">
+
+<h1>Dashboard</h1>
+
+<div class="grid grid-3">
+
+  <div class="card">
+    <div class="title">Aproveitamento</div>
+    <h2 id="acc">0%</h2>
+  </div>
+
+  <div class="card">
+    <div class="title">Total de Exercícios</div>
+    <h2 id="total">0</h2>
+  </div>
+
+  <div class="card">
+    <div class="title">Acertos</div>
+    <h2 id="correct">0</h2>
+  </div>
+
+</div>
+
+<div class="card">
+  <div class="title">Desempenho</div>
+  
+  <p>Aproveitamento</p>
+  <h2 id="acc"></h2>
+  
+  <div class="progress-box">
+    <div class="progress-bar">
+      <div id="progressFill" class="progress-fill"></div>
+    </div>
+  </div>
+  
+  <p>Total</p>
+  <span id="total"></span>
+  
+  <p>Acertos</p>
+  <span id="correct"></span>
+</div>
+</main>
+
+<script type="module">
+import { Progress } from './js/progress.js';
+
+function load() {
+  const p = Progress.load();
+
+  document.getElementById("acc").innerText =
+    Progress.accuracy() + "%";
+
+  document.getElementById("total").innerText = p.total;
+  document.getElementById("correct").innerText = p.correct;
+
+  let html = "";
+
+  for (let t in p.topics) {
+    let acc = (p.topics[t].correct / p.topics[t].total * 100).toFixed(1);
+    html += `<li>${t}: ${acc}%</li>`;
+  }
+
+  document.getElementById("topics").innerHTML = html;
+}
+
+load();
+</script>
+
+</body>
+</html>
