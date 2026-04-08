@@ -60,6 +60,13 @@
   </div>
 
 </div>
+<div class="card">
+  <div class="title">Ranking</div>
+
+  <ul id="rankingList"></ul>
+
+  <p><b>Recorde:</b> <span id="record">0</span></p>
+</div>
 
 </main>
 
@@ -67,8 +74,11 @@
 import { Engine } from './js/engine.js';
 import { Exercises } from './js/exercises.js';
 import { Progress } from './js/progress.js';
+import { Challenge } from './js/challenge.js';
 
 let current;
+
+const card = document.getElementById("exerciseCard");
 
 window.newExercise = () => {
   const ex = Exercises[Math.floor(Math.random()*Exercises.length)];
@@ -76,37 +86,84 @@ window.newExercise = () => {
 
   document.getElementById("question").innerText = current.question;
   document.getElementById("feedback").innerHTML = "";
+  document.getElementById("answer").value = "";
+
+  card.classList.remove("success", "error");
 };
 
 window.check = () => {
-  const user = parseFloat(document.getElementById("answer").value);
 
+  const input = document.getElementById("answer").value;
+
+  if (!input) {
+    document.getElementById("feedback").innerHTML =
+      "<span class='feedback-err'>Digite uma resposta</span>";
+    return;
+  }
+
+  const user = parseFloat(input);
   const correct = current.solve(Engine);
 
   const ok = Math.abs(user - correct) < 0.1;
 
   Progress.update(current.type, ok);
 
-  document.getElementById("feedback").innerHTML =
-    ok
-    ? "<span class='feedback-ok'>✔ Correto</span>"
-    : `<span class='feedback-err'>✖ Errado<br>${current.formula}</span>`;
+  if (ok) {
+    document.getElementById("feedback").innerHTML =
+      "<span class='feedback-ok'>✔ Correto</span>";
+
+    card.classList.add("success");
+    card.classList.remove("error");
+
+    // MODO DESAFIO
+    if (Challenge?.active) {
+      Challenge.hit();
+      setTimeout(() => newExercise(), 400);
+    }
+
+  } else {
+    document.getElementById("feedback").innerHTML =
+      `<span class='feedback-err'>✖ Errado<br>${current.formula}</span>`;
+
+    card.classList.add("error");
+    card.classList.remove("success");
+
+    setTimeout(() => card.classList.remove("error"), 400);
+  }
 
   updateStats();
 };
 
+window.startChallenge = () => {
+  Challenge.start({
+    newExercise
+  }, {
+    updateTimer: (t) => {
+      document.getElementById("timer").innerText = t + "s";
+    },
+    feedback: (msg) => {
+      document.getElementById("feedback").innerHTML = msg;
+    }
+  });
+};
+
 function updateStats() {
   const p = Progress.load();
+  const acc = parseFloat(Progress.accuracy());
 
-  document.getElementById("acc").innerText =
-    Progress.accuracy() + "%";
-
+  document.getElementById("acc").innerText = acc + "%";
   document.getElementById("total").innerText = p.total;
   document.getElementById("correct").innerText = p.correct;
 }
 
+// ENTER PARA RESPONDER
+document.getElementById("answer")
+  .addEventListener("keydown", e => {
+    if (e.key === "Enter") check();
+  });
+
+// INIT
 updateStats();
 </script>
-
 </body>
 </html>

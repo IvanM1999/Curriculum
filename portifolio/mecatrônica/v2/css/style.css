@@ -311,3 +311,20 @@ li {
   padding: 100px 20px;
   background: radial-gradient(circle at center, #0f1c3d, #0a0f1f);
 }
+
+.card.success {
+  border: 1px solid #00ff9d;
+  box-shadow: 0 0 10px rgba(0,255,157,0.3);
+}
+
+.card.error {
+  border: 1px solid #ff4d4d;
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
