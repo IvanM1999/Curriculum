@@ -328,3 +328,13 @@ li {
   50% { transform: translateX(5px); }
   100% { transform: translateX(0); }
 }
+
+#rankingList {
+  list-style: none;
+  padding: 0;
+}
+
+#rankingList li {
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}

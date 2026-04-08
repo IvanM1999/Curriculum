@@ -164,6 +164,35 @@ document.getElementById("answer")
 
 // INIT
 updateStats();
+
+window.updateRanking = updateRanking;
+
+// carregar ranking ao abrir
+updateRanking(
+  JSON.parse(localStorage.getItem("circuitlab_ranking")) || []
+);
+
+function updateRanking(list) {
+  const el = document.getElementById("rankingList");
+
+  let html = "";
+
+  list.forEach((r, i) => {
+    html += `<li>#${i+1} - ${r.score} pts (${getMedal(r.score)})</li>`;
+  });
+
+  el.innerHTML = html;
+
+  document.getElementById("record").innerText =
+    list.length ? list[0].score : 0;
+}
+
+function getMedal(score) {
+  if (score >= 100) return "🥇";
+  if (score >= 60) return "🥈";
+  if (score >= 30) return "🥉";
+  return "-";
+}
 </script>
 </body>
 </html>
