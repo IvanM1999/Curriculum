@@ -252,3 +252,62 @@ body {
   color: #ff4d4d;
   font-weight: bold;
 }
+
+textarea.input {
+  resize: none;
+  font-family: monospace;
+}
+
+#steps {
+  margin-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 10px;
+}
+
+#progressText {
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+/* HOVER CARD */
+.card.hover:hover {
+  transform: translateY(-5px);
+  transition: 0.2s;
+  box-shadow: 0 5px 20px rgba(0,255,255,0.1);
+}
+
+/* SYSTEM HIGHLIGHT */
+.system.highlight {
+  background: #0f1833;
+  border-top: 1px solid rgba(0,255,255,0.1);
+  border-bottom: 1px solid rgba(0,255,255,0.1);
+}
+
+/* CTA FINAL */
+.cta {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.cta h2 {
+  margin-bottom: 10px;
+}
+
+.cta p {
+  opacity: 0.8;
+}
+
+/* HERO MELHORADO */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: radial-gradient(circle at center, #0f1c3d, #0a0f1f);
+}

@@ -1,55 +1,51 @@
 import { Engine } from './engine.js';
 import { Exercises } from './exercises.js';
 import { Progress } from './progress.js';
+import { UI } from './ui.js';
 
-let current;
-
-function newExercise() {
-   const ex = Exercises[Math.floor(Math.random() * Exercises.length)];
-   current = ex.generate();
+const App = {
    
-   document.getElementById("q").innerText = current.question;
-   document.getElementById("feedback").innerHTML = "";
+   current: null,
    
-   const card = document.querySelector(".card");
-   card.classList.remove("success", "error");
-}
-
-function check() {
-   const user = parseFloat(document.getElementById("a").value);
-   const correct = current.solve(Engine);
-   
-   const card = document.querySelector(".card");
-   
-   const ok = Math.abs(user - correct) < 0.1;
-   
-   Progress.update(current.type, ok);
-   
-   if (ok) {
-      document.getElementById("feedback").innerHTML =
-         "<span class='feedback-ok'>✔ Correto!</span>";
+   newExercise() {
+      const ex = Exercises[Math.floor(Math.random() * Exercises.length)];
+      this.current = ex.generate();
       
-      card.classList.remove("error");
-      card.classList.add("success");
+      UI.question(this.current.question);
+      UI.feedback("", "");
+   },
+   
+   check() {
+      const user = parseFloat(document.getElementById("answer").value);
+      const correct = this.current.solve(Engine);
       
-   } else {
-      document.getElementById("feedback").innerHTML =
-         `<span class='feedback-err'>✖ Errado<br>${current.formula}</span>`;
+      const ok = Math.abs(user - correct) < 0.1;
       
-      card.classList.remove("success");
-      card.classList.add("error");
+      Progress.update(this.current.type, ok);
       
-      // remove shake depois
-      setTimeout(() => card.classList.remove("error"), 400);
+      if (ok) {
+         UI.feedback("✔ Correto!", "ok");
+      } else {
+         UI.feedback(`✖ Errado<br>${this.current.formula}`, "err");
+      }
+      
+      UI.animateCard(ok);
+      this.updateStats();
+   },
+   
+   updateStats() {
+      const p = Progress.load();
+      
+      UI.stats({
+         acc: parseFloat(Progress.accuracy()),
+         total: p.total,
+         correct: p.correct
+      });
    }
    
-   updateStats();
-}
+};
 
-function updateStats() {
-   document.getElementById("acc").innerText =
-      Progress.accuracy() + "%";
-}
+window.newExercise = () => App.newExercise();
+window.check = () => App.check();
 
-window.newExercise = newExercise;
-window.check = check;
+App.updateStats();
