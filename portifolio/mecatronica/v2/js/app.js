@@ -1,97 +1,80 @@
+import { UI, Card, Button, Input, Feedback } from './ui.js';
 import { Engine } from './engine.js';
 import { Exercises } from './exercises.js';
 import { Progress } from './progress.js';
-import { UI } from './ui.js';
 
 const App = {
    
    current: null,
    
+   init() {
+      this.newExercise();
+      this.updateStats();
+   },
+   
    newExercise() {
+      const ex = Exercises[Math.floor(Math.random() * Exercises.length)];
+      this.current = ex.generate();
       
-import { getAdaptiveExercise } from './exercises.js';
+      UI.mount("exerciseContainer",
+         Card("Exercício", `
+        <p>${this.current.question}</p>
 
-this.current = getAdaptiveExercise(Progress, Exercises);
+        ${Input("answer", "Resposta")}
 
-UI.question(this.current.question);
-      UI.feedback("", "");
-      UI.clearInput?.("answer");
-      
-      // foco automático
-      document.getElementById("answer")?.focus();
+        ${Button("Verificar", "check()")}
+        ${Button("Novo", "newExercise()", "secondary")}
+
+        <div id="feedback"></div>
+      `)
+      );
    },
    
    check() {
-      
-      // proteção
-      if (!this.current) {
-         UI.feedback("Gere um exercício primeiro", "err");
-         return;
-      }
-      
-      const inputEl = document.getElementById("answer");
-      const raw = inputEl.value;
-      
-      // validação
-      if (!raw) {
-         UI.feedback("Digite uma resposta", "err");
-         return;
-      }
-      
-      const user = parseFloat(raw);
-      
-      if (isNaN(user)) {
-         UI.feedback("Valor inválido", "err");
-         return;
-      }
-      
+      const user = parseFloat(document.getElementById("answer").value);
       const correct = this.current.solve(Engine);
       
       const ok = Math.abs(user - correct) < 0.1;
       
       Progress.update(this.current.type, ok);
       
-      if (ok) {
-         UI.feedback("✔ Correto!", "ok");
-         
-         // preparação futura (modo desafio)
-         if (window.Challenge?.active) {
-            window.Challenge.hit();
-            setTimeout(() => this.newExercise(), 300);
-         }
-         
-      } else {
-         UI.feedback(
+      UI.mount("feedback",
+         Feedback(
+            ok ?
+            "✔ Correto!" :
             `✖ Errado<br>${this.current.formula}`,
-            "err"
-         );
-      }
+            ok ? "ok" : "err"
+         )
+      );
       
-      UI.animateCard(ok);
       this.updateStats();
    },
    
    updateStats() {
-      
       const p = Progress.load();
       
-      UI.stats({
-         acc: parseFloat(Progress.accuracy()),
-         total: p.total,
-         correct: p.correct
-      });
+      UI.mount("statsContainer", `
+      <div class="card">
+        <div class="title">Aproveitamento</div>
+        <h2>${Progress.accuracy()}%</h2>
+      </div>
+
+      <div class="card">
+        <div class="title">Total</div>
+        <h2>${p.total}</h2>
+      </div>
+
+      <div class="card">
+        <div class="title">Acertos</div>
+        <h2>${p.correct}</h2>
+      </div>
+    `);
    }
    
 };
 
-// EVENTOS
+// GLOBAL (para funcionar com onclick)
 window.newExercise = () => App.newExercise();
 window.check = () => App.check();
 
-// ENTER = responder
-document.getElementById("answer")?.addEventListener("keydown", e => {
-   if (e.key === "Enter") App.check();
-});
-
-// INIT
-App.updateStats();
+App.init();
