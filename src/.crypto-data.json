@@ -1,0 +1,41 @@
+{
+  "user": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "phone": "+55 (XX) XXXXX-XXXX",
+    "address": "Your Address",
+    "city": "Your City",
+    "state": "Your State",
+    "zipcode": "XXXXX-XXX"
+  },
+  "crypto_wallets": [
+    {
+      "id": 1,
+      "name": "Main Wallet",
+      "address": "1A1z7agoat8Bt16ySrU6au36RWQWZhxvx",
+      "type": "Bitcoin",
+      "balance": "0.00000000",
+      "created_at": "2024-01-01",
+      "notes": ""
+    }
+  ],
+  "exchanges": [
+    {
+      "id": 1,
+      "name": "Exchange Name",
+      "api_key": "ENCRYPTED",
+      "status": "active",
+      "created_at": "2024-01-01"
+    }
+  ],
+  "portfolio": {
+    "total_balance_usd": 0.00,
+    "last_updated": "2024-01-01",
+    "currencies": []
+  },
+  "security": {
+    "2fa_enabled": true,
+    "backup_key": "ENCRYPTED",
+    "last_backup": "2024-01-01"
+  }
+}
