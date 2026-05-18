@@ -14,7 +14,7 @@
 |-------------|-------------|--------|
 | 🎨 **Perfil de Apresentação** | Meu cartão de visitas. Aqui você entende quem sou e como organizo meu trabalho. | <a href="https://github.com/IvanM1999" style="background-color:#1f2937;color:white;padding:6px 12px;border-radius:8px;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,0.2);">🐙 Ver perfil</a> |
 | 🧪 **Projetos Pessoais** | Espaço para ideias, testes e aprendizados. Onde a criatividade encontra o código. | <a href="https://github.com/IvvyDestiny" style="background-color:#1f2937;color:white;padding:6px 12px;border-radius:8px;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,0.2);">🧪 Ver perfil</a> |
-| 🚀 **Projetos Oficiais** | Projetos que estou desenvolvendo com afinco e responsabilidade. | <a href="https://github.com/IvvyDestiny1999" style="background-color:#1f2937;color:white;padding:6px 12px;border-radius:8px;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,0.2);">🚀 Ver perfil</a> |
+| 🚀 **Projetos Oficiais** | Projetos que estou desenvolvendo em paralelo. | <a href="https://github.com/IvvyDestiny1999" style="background-color:#1f2937;color:white;padding:6px 12px;border-radius:8px;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,0.2);">🚀 Ver perfil</a> |
 
 ---
 

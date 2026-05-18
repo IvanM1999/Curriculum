@@ -6,76 +6,154 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Ivan Montibeller - Tecnologia & Manutenção</title>
-  
+
   <!-- Meta SEO -->
-  <meta name="description" content="Portfólio de Ivan Montibeller - Desenvolvedor Full Stack, técnico em eletrônica e análise de sistemas. Especializado em web, mobile e soluções tecnológicas.">
-  <meta name="keywords" content="desenvolvedor, programação, eletrônica, sistemas, web, fullstack, tecnologia, blumenau">
+  <meta
+    name="description"
+    content="Portfólio de Ivan Montibeller - Desenvolvedor Full Stack, técnico em eletrônica e análise de sistemas. Especializado em web, mobile e soluções tecnológicas."
+  >
+
+  <meta
+    name="keywords"
+    content="desenvolvedor, programação, eletrônica, sistemas, web, full stack, tecnologia, Blumenau"
+  >
+
   <meta name="author" content="Ivan Montibeller">
   <meta name="robots" content="index, follow">
   <meta name="language" content="Portuguese">
   <meta name="revisit-after" content="7 days">
-  
+
   <!-- Open Graph -->
   <meta property="og:type" content="profile">
   <meta property="og:url" content="https://ivanmontibeller.com/">
-  <meta property="og:title" content="Ivan Montibeller - Tecnologia & Manutenção">
-  <meta property="og:description" content="perfil de Ivan Montibeller com projetos, formação e experiência em desenvolvimento de sistemas.">
-  <meta property="og:image" content="https://ivanmontibeller.onrender.com/src/img/logo.jpeg">
+
+  <meta
+    property="og:title"
+    content="Ivan Montibeller - Tecnologia & Manutenção"
+  >
+
+  <meta
+    property="og:description"
+    content="Perfil de Ivan Montibeller com projetos, formação e experiência em desenvolvimento de sistemas."
+  >
+
+  <meta
+    property="og:image"
+    content="https://ivanmontibeller.onrender.com/src/img/logo.jpeg"
+  >
+
   <meta property="og:image:alt" content="Logo de Ivan Montibeller">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:secure_url" content="https://ivanmontibeller.onrender.com/src/img/logo.jpeg">
+
+  <meta
+    property="og:image:secure_url"
+    content="https://ivanmontibeller.onrender.com/src/img/logo.jpeg"
+  >
+
   <meta property="og:locale" content="pt_BR">
-  
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ivan Montibeller - Desenvolvedor Full Stack">
-  <meta name="twitter:description" content="Portfolio de desenvolvimento de sistemas e soluções tecnológicas">
-  <meta name="twitter:image" content="https://ivanmontibeller.onrender.com/src/img/logo.jpeg">
+
+  <meta
+    name="twitter:title"
+    content="Ivan Montibeller - Desenvolvedor Full Stack"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Portfólio de desenvolvimento de sistemas e soluções tecnológicas."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://ivanmontibeller.onrender.com/src/img/logo.jpeg"
+  >
+
   <meta name="twitter:image:alt" content="Logo de Ivan Montibeller">
-  
+
   <!-- Segurança -->
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' https://cdn.jsdelivr.net">
+  <meta
+    name="referrer"
+    content="strict-origin-when-cross-origin"
+  >
+
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' https://cdn.jsdelivr.net"
+  >
+
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-  
+
   <!-- Canonical -->
-  <link rel="canonical" href="https://ivanmontibeller.onrender.com/">
-  
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/lucide-static/font/lucide.css" rel="stylesheet">
-  <link href="/backend/style.css" rel="stylesheet">
+  <link
+    rel="canonical"
+    href="https://ivanmontibeller.onrender.com/"
+  >
+
+  <!-- CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/lucide-static/font/lucide.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="/backend/style.css"
+    rel="stylesheet"
+  >
+
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     a {
       transition: all 0.2s ease;
     }
+
     a:focus {
       outline: 2px solid currentColor;
       outline-offset: 2px;
     }
+
     .email-protected::before {
       content: attr(data-email);
     }
+
     .phone-protected::before {
       content: attr(data-phone);
     }
-    /* Estilo para imagem de perfil */
+
+    /* Estilo da imagem de perfil */
     .profile-image {
       width: 160px;
       height: 160px;
-      object-fit: contain;
-      object-position: center;
-      border-radius: 50%;
-      border: 4px solid white;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
       display: block;
       margin: 0 auto;
+
+      object-fit: contain;
+      object-position: center;
+
+      border-radius: 50%;
+      border: 4px solid white;
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
       flex-shrink: 0;
     }
 
@@ -93,91 +171,303 @@
       }
     }
   </style>
-  
-  <!-- Schema.org Developer/Person -->
+
+  <!-- Schema.org Person -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Ivan Montibeller",
-    "jobTitle": "Desenvolvedor Full Stack & Técnico em Sistemas",
-    "url": "https://ivanmontibeller.onrender.com/",
-    "image": [
-      "https://ivanmontibeller.onrender.com/src/img/perfil.png",
-      "https://ivanmontibeller.onrender.com/src/img/logo.jpeg"
-    ],
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://ivanmontibeller.onrender.com/src/img/logo.jpeg",
-      "width": 1200,
-      "height": 630
-    },
-    "sameAs": [
-      "https://github.com/IvanM1999",
-      "https://wa.me/5547984863051"
-    ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Freelancer"
-    },
-    "alumniOf": {
-      "@type": "EducationalOrganization",
-      "name": "UNIASSELVI"
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+
+      "name": "Ivan Montibeller",
+
+      "jobTitle": "Desenvolvedor Full Stack e Técnico em Sistemas",
+
+      "url": "https://ivanmontibeller.onrender.com/",
+
+      "image": [
+        "https://ivanmontibeller.onrender.com/src/img/perfil.png",
+        "https://ivanmontibeller.onrender.com/src/img/logo.jpeg"
+      ],
+
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://ivanmontibeller.onrender.com/src/img/logo.jpeg",
+        "width": 1200,
+        "height": 630
+      },
+
+      "sameAs": [
+        "https://github.com/IvanM1999",
+        "https://wa.me/5547984863051"
+      ],
+
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelancer"
+      },
+
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "UNIASSELVI"
+      }
     }
-  }
   </script>
 </head>
+
 <body class="bg-gray-100 text-gray-800 font-sans">
 
   <!-- Header -->   
-  <header class="bg-gradient-to-r from-blue-700 to-green-500 text-white py-10 shadow-lg">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <img src="/src/img/perfil.png" alt="Ivan Montibeller - Desenvolvedor Full Stack" class="profile-image">
-      <h1 class="text-4xl font-bold mt-4">Ivan Montibeller</h1>
-      <p class="text-lg mt-2">Tecnologia, Inovação, Manutenção & Desenvolvimento</p>
-    <div class="flex justify-center space-x-4 mt-6 flex-wrap gap-3">
-      <a href="mailto:ivan.m301299@outlook.com" class="bg-white text-blue-700 px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200" title="Enviar e-mail">📧 E-mail</a>
-      <a href="https://wa.me/5547984863051" class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200" title="Contato via WhatsApp">💬 WhatsApp</a>
-      <a href="https://github.com/IvanM1999/Curriculum/blob/main/README.md" class="bg-gray-800 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200" title="Acessar GitHub">🐙 GitHub</a>
-      <a 
-        href="src/img/cartao-visita.png" 
-        download="cartao-visita-ivan-montibeller.png" 
+<header class="bg-gradient-to-r from-blue-700 to-green-500 text-white py-10 shadow-lg">
+
+  <div class="max-w-5xl mx-auto px-6 text-center">
+
+    <img
+      src="/src/img/perfil.png"
+      alt="Ivan Montibeller - Desenvolvedor Full Stack"
+      class="profile-image"
+    >
+
+    <h1 class="text-4xl font-bold mt-4">
+      Ivan Montibeller
+    </h1>
+
+    <p class="text-lg mt-2">
+      Tecnologia, Inovação, Manutenção & Desenvolvimento
+    </p>
+
+    <!-- Botões principais -->
+    <div class="flex justify-center flex-wrap gap-3 mt-6">
+
+      <a
+        href="mailto:ivan.m301299@outlook.com"
+        class="bg-white text-blue-700 px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200"
+        title="Enviar e-mail"
+      >
+        📧 E-mail
+      </a>
+
+      <a
+        href="https://wa.me/5547984863051"
+        class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200"
+        title="Contato via WhatsApp"
+      >
+        💬 WhatsApp
+      </a>
+
+      <a
+        href="https://github.com/IvanM1999/Curriculum/blob/main/README.md"
+        class="bg-gray-800 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200"
+        title="Acessar GitHub"
+      >
+        🐙 GitHub
+      </a>
+
+      <a
+        href="src/img/cartao-visita.png"
+        download="cartao-visita-ivan-montibeller.png"
         class="bg-yellow-400 text-gray-900 px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200 font-semibold"
         title="Baixar cartão de visita de Ivan Montibeller"
-        aria-label="Baixar cartão de visita em formato PNG"> 📥 Cartão de Visita </a>
+        aria-label="Baixar cartão de visita em formato PNG"
+      >
+        📥 Cartão de Visita
+      </a>
+
     </div>
-</div>
+
+    <!-- Navbar -->
+    <nav class="mt-10" aria-label="Navegação principal do currículo">
+
+      <!-- Título da navbar -->
+      <div class="flex justify-center mb-5">
+
+        <h2
+          class="text-xl md:text-2xl font-bold tracking-wide uppercase
+                 bg-white/10 backdrop-blur-md
+                 px-6 py-2 rounded-2xl shadow-lg
+                 text-white hover:scale-105 transition duration-300"
+        >
+          ✨ Atalhos Rápidos
+        </h2>
+
+      </div>
+
+      <!-- Links -->
+      <ul class="flex flex-wrap justify-center gap-3 md:gap-5">
+
+        <li>
+          <a
+            href="#sobre"
+            class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-blue-700 transition-all duration-300 px-4 py-2 rounded-xl font-medium shadow-md"
+          >
+            👤 Sobre
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="#formacoes"
+            class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-blue-700 transition-all duration-300 px-4 py-2 rounded-xl font-medium shadow-md"
+          >
+            🎓 Formações
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="#idiomas"
+            class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-blue-700 transition-all duration-300 px-4 py-2 rounded-xl font-medium shadow-md"
+          >
+            🌎 Idiomas
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="#habilidades"
+            class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-blue-700 transition-all duration-300 px-4 py-2 rounded-xl font-medium shadow-md"
+          >
+            ⚡ Habilidades
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="#projetos"
+            class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-blue-700 transition-all duration-300 px-4 py-2 rounded-xl font-medium shadow-md"
+          >
+            🚀 Projetos
+          </a>
+        </li>
+        <li>
+          <a
+            href="#experiencia"
+            class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-blue-700 transition-all duration-300 px-4 py-2 rounded-xl font-medium shadow-md"
+          >
+            💼 Experiência
+          </a>
+        </li>
+        <li>
+          <a
+            href="#contato"
+            class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-blue-700 transition-all duration-300 px-4 py-2 rounded-xl font-medium shadow-md"
+          >
+            📞 Contato
+          </a>
+        </li>
+      </ul>
+    </nav>
+    </div>
 </header>
 
   <!-- Sobre -->
-<section class="max-w-5xl mx-auto px-6 py-5">
-  <div class="container grid-2">
-      <section class="max-w-5xl mx-auto px-6 py-5">
-  <div class="max-w-5xl mx-auto px-6">
-    <h2 class="text-2xl font-bold mb-8 text-gray-700 border-b-4 border-green-400 inline-block">Bio</h2>
-      <p>Ivan, 26 anos, apaixonado por tecnologia e eletrônica. Com experiência em manutenção de dispositivos eletrônicos e desenvolvimento de soluções tecnológicas, busco sempre por novas habilidades.<br>
-      Natural de Blumenau.<br>
-      Principais habilidades com tecnologias da informação, eletrônica, elétrica, informática e manutenção de afins.<br>
-      A procura de certificações, crescimento profissional e pessoal.<br>
-      Sempre disposto para desenvolver novas habilidades.</p>
+<section id="sobre" class="max-w-5xl mx-auto px-6 py-5">
+
+  <div class="space-y-6">
+
+    <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- Bio -->
+        <div class="max-w-5xl mx-auto px-6">
+
+          <h2 class="text-2xl font-bold mb-8 text-gray-700 border-b-4 border-green-400 inline-block">
+            Bio
+          </h2>
+
+          <p class="leading-relaxed text-gray-700">
+            Ivan, 26 anos, apaixonado por tecnologia e eletrônica.
+            Com experiência em manutenção de dispositivos eletrônicos e desenvolvimento de soluções tecnológicas,
+            busco sempre por novas habilidades.
+            <br><br>
+
+            Natural de Blumenau.
+            <br><br>
+
+            Principais habilidades com tecnologias da informação,
+            eletrônica, elétrica, informática e manutenção de afins.
+            <br><br>
+
+            À procura de certificações, crescimento profissional e pessoal.
+            <br><br>
+
+            Sempre disposto a desenvolver novas habilidades.
+          </p>
+
+        </div>
+
+        <!-- Informações -->
+        <div class="max-w-5xl mx-auto px-6">
+
+          <h2 class="text-2xl font-bold mb-8 text-gray-700 border-b-4 border-green-400 inline-block">
+            Informações
+          </h2>
+
+          <div class="space-y-4 text-gray-700">
+
+            <p>
+              <strong>Telefone:</strong>
+
+              <a
+                href="tel:+5547984863051"
+                class="text-blue-600 hover:underline"
+                title="Ligar para Ivan"
+              >
+                +55 (47) 98486-3051
+              </a>
+            </p>
+
+            <p>
+              <strong>E-mail:</strong>
+
+              <a
+                href="mailto:ivan.m301299@outlook.com"
+                class="text-blue-600 hover:underline"
+                title="Enviar e-mail"
+              >
+                ivan.m301299@outlook.com
+              </a>
+
+              <br>
+
+              <a
+                href="mailto:ivan.m301299@gmail.com"
+                class="text-blue-600 hover:underline"
+                title="Enviar e-mail alternativo"
+              >
+                ivan.m301299@gmail.com
+              </a>
+            </p>
+
+            <div class="pt-2">
+
+              <a
+                href="https://github.com/IvanM1999"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-gray-800 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform transition duration-200"
+              >
+                🐙 GitHub
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
-    </section>
-  <section class="max-w-5xl mx-auto px-6 py-5">
-  <div class="max-w-5xl mx-auto px-6">
-    <h2 class="text-2xl font-bold mb-8 text-gray-700 border-b-4 border-green-400 inline-block"> Informações</h2>
-      <p><strong>Telefone:</strong> <a href="tel:+5547984863051" class="text-blue-600 hover:underline" title="Ligar para Ivan">+55 (47) 98486-3051</a></p>
-      <p><strong>E-mail:</strong> <a href="mailto:ivan.m301299@outlook.com" class="text-blue-600 hover:underline" title="Enviar e-mail">ivan.m301299@outlook.com</a><br>
-      <a href="mailto:ivan.m301299@gmail.com" class="text-blue-600 hover:underline" title="Enviar e-mail alternativo">ivan.m301299@gmail.com</a></p>
-      <br/>
-      <a href="https://github.com/IvanM1999" class="bg-gray-800 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transform"> 🐙 GitHub</a>
-    </div>
-    </section>
+
   </div>
+
 </section>
 
   <!-- Formação -->
-
-  <section class="max-w-5xl mx-auto px-6 py-5">
+<section id="formacoes" id="sobre" class="max-w-5xl mx-auto px-6 py-5">
+  <div class="space-y-6">
+    <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
   <div class="max-w-5xl mx-auto px-6">
     <h2 class="text-2xl font-bold mb-8 text-gray-700 border-b-4 border-blue-400 inline-block">Formações</h2>
     <!-- Bloco da formação acadêmica -->
@@ -363,14 +653,20 @@
 
       <!-- IDIOMAS -->
   <section class="max-w-5xl mx-auto px-6 py-5">
-  <div class="max-w-5xl mx-auto px-6">
+  </section>
+    
+    
+ <section id="idiomas" class="max-w-5xl mx-auto px-6 py-5">
+    <div class="space-y-6">
+      </div>      
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
     <h2 class="text-2xl font-bold mb-8 text-gray-700 border-b-4 border-blue-400 inline-block">IDIOMAS</h2>
     <p class="leading-relaxed text-lg"> <strong> Inglês básico </strong> <i>Busco pelo desenvolvimento</i>
     </p>
   </section>
 
 <!-- Habilidades -->
- <div>  <section class="max-w-5xl mx-auto px-6 py-5">
+<section id="habilidades" class="max-w-5xl mx-auto px-6 py-5">
     <div class="space-y-6">
       </div>      
       <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
@@ -423,8 +719,8 @@
 </section>
 </div>
 
-  <!-- Desenvolvimento -->
-  <section class="max-w-5xl mx-auto px-6 py-5">
+  <!-- projetos -->
+  <section id="projetos" class="max-w-5xl mx-auto px-6 py-5">
     <div class="space-y-6">
       </div>      
       <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
@@ -447,7 +743,7 @@
 
 
 <!-- Experiência de Trabalho-->  
-  <section class="max-w-5xl mx-auto px-6 py-5">
+  <section id="experiencia" class="max-w-5xl mx-auto px-6 py-5">
         <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
         <h3 class="font-semibold text-xl">Experiências de Trabalho</h3>
          <ul>
@@ -468,7 +764,7 @@
 </section>
 
   <!-- Contato -->
-  <footer class="bg-gradient-to-r from-green-500 to-blue-700 text-white py-10 mt-12">
+  <footer id="contato" class="bg-gradient-to-r from-green-500 to-blue-700 text-white py-10 mt-12">
     <div class="max-w-5xl mx-auto px-6">
       <div class="text-center mb-8">
         <h2 class="text-2xl font-bold">Vamos Conversar?</h2>
