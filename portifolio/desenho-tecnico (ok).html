@@ -296,7 +296,7 @@
                 
                 <div class="input-group">
                     <div class="field-box" id="box-numeric-left">
-                        <input type="number" id="val-left" value="9.5250" step="0.0001" oninput="calcularMetrologia()">
+                        <input type="number" id="val-left" value="1.0000" step="0.0001" oninput="calcularMetrologia()">
                     </div>
                     <div class="fraction-row" id="box-fraction-left">
                         <select id="frac-int" onchange="calcularMetrologia()"></select>
@@ -306,9 +306,9 @@
                     </div>
                     <div class="field-box select-unit">
                         <select id="unit-left" onchange="adaptarInterface()">
-                            <option value="mm" selected>Milímetros (mm)</option>
-                            <option value="in_dec">Polegada Milesimal (in)</option>
+                            <option value="in_dec" selected>Polegada Milesimal (in)</option>
                             <option value="in_frac">Polegada Fracionária (pol)</option>
+                            <option value="mm">Milímetros (mm)</option>
                         </select>
                     </div>
                 </div>
@@ -323,9 +323,8 @@
                     </div>
                     <div class="field-box select-unit">
                         <select id="unit-right" onchange="calcularMetrologia()">
-                            <option value="in_frac" selected>Polegada Fracionária (pol)</option>
                             <option value="in_dec">Polegada Milesimal (in)</option>
-                            <option value="mm">Milímetros (mm)</option>
+                            <option value="mm" selected>Milímetros (mm)</option>
                         </select>
                     </div>
                 </div>
@@ -429,13 +428,18 @@
         const leftSel = document.getElementById('unit-left');
         const rightSel = document.getElementById('unit-right');
         
+        // Permuta os valores de conversão simples
         let temp = leftSel.value;
+        // Fração não pode ir para a direita, validamos:
+        let destinoVal = (temp === 'in_frac') ? 'in_dec' : temp;
+        
         leftSel.value = rightSel.value;
-        rightSel.value = temp;
+        rightSel.value = destinoVal;
         
         adaptarInterface();
     }
 
+    // NÚCLEO MATEMÁTICO V4 - ADICIONA PRECISÃO, FRAÇÃO MAIS PRÓXIMA E HISTÓRICO
     let timeoutHistorico = null;
     function calcularMetrologia() {
         const uLeft = document.getElementById('unit-left').value;
@@ -447,7 +451,6 @@
         let explicacao = "";
         let erroDetectado = false;
 
-        // --- ENTRADAS ---
         if (uLeft === 'in_dec') {
             let v = parseFloat(document.getElementById('val-left').value);
             if(isNaN(v)) erroDetectado = true;
@@ -482,63 +485,45 @@
             return;
         }
 
-        // --- SAÍDAS ---
+        // Processa Saída
         let valorFinalStr = "";
-        
         if (uRight === 'mm') {
             let calculadoMm = polegadaDecimal * 25.4;
             valorFinalStr = calculadoMm.toFixed(4) + " mm";
             if (uLeft !== 'mm') {
                 explicacao += `• <strong>Cálculo Métrico Final:</strong> Multiplicação pelo fator absoluto: <code>${polegadaDecimal.toFixed(4)} × 25,4000 = ${calculadoMm.toFixed(4)} mm</code>.<br>`;
             }
-        } 
-        else if (uRight === 'in_dec') {
-            valorFinalStr = polegadaDecimal.toFixed(4) + " in";
-            if (uLeft !== 'in_dec') {
-                explicacao += `• <strong>Cálculo Decimal Final:</strong> Valor convertido para formato milesimal puro: <code>${valorFinalStr}</code>.<br>`;
-            }
-        } 
-        // LÓGICA DE CONVERSÃO PARA POLEGADA FRACIONÁRIA VIA SAÍDA DIRETA
-        else if (uRight === 'in_frac') {
+        } else {
+            valorField = polegadaDecimal.toFixed(4) + " in";
+            valorFinalStr = valorField;
+        }
+
+        // EXTRA V4: Análise de Fração Comercial Mais Próxima (Aproximação até 1/64)
+        if (uLeft === 'mm' || uLeft === 'in_dec') {
             let parteInteira = Math.floor(polegadaDecimal);
             let parteFracionaria = polegadaDecimal - parteInteira;
-            
-            // Multiplicação inteligente por 64 para mapear fração comercial mais próxima
             let sessentaAvos = Math.round(parteFracionaria * 64);
             
-            if (sessentaAvos === 0) {
-                valorFinalStr = parteInteira + '"';
-                explicacao += `• <strong>Conversão Fracionária Inteligente:</strong> O valor mapeado equivale ao inteiro exato <code>${parteInteira}"</code>.<br>`;
-            } else if (sessentaAvos === 64) {
-                valorFinalStr = (parteInteira + 1) + '"';
-                explicacao += `• <strong>Conversão Fracionária Inteligente:</strong> O arredondamento atingiu a próxima polegada inteira: <code>${parteInteira + 1}"</code>.<br>`;
-            } else {
+            if (sessentaAvos > 0) {
                 let [nSimp, dSimp] = simplificar(sessentaAvos, 64);
-                valorFinalStr = (parteInteira > 0 ? parteInteira + " " : "") + nSimp + "/" + dSimp + '"';
-                
-                explicacao += `• <strong>Conversão Fracionária Inteligente (Base de Oficina de 1/64"):</strong><br>`;
-                explicacao += `&nbsp;&nbsp;1. Extraímos a parte decimal restante: <code>${parteFracionaria.toFixed(4)}"</code>.<br>`;
-                explicacao += `&nbsp;&nbsp;2. Multiplicamos pela precisão comercial (64): <code>${parteFracionaria.toFixed(4)} × 64 = ${sessentaAvos}</code>.<br>`;
-                explicacao += `&nbsp;&nbsp;3. Fração crua encontrada: <code>${sessentaAvos}/64"</code>.<br> `;
-                explicacao += `&nbsp;&nbsp;4. Simplificação por Máximo Divisor Comum (MDC): <code>${nSimp}/${dSimp}"</code>.<br>`;
-            }
+                let fracAproximada = (parteInteira > 0 ? parteInteira + " " : "") + nSimp + "/" + dSimp + '"';
+                let valorRealFrac = parteInteira + (sessentaAvos / 64);
+                let desvio = (polegadaDecimal - valorRealFrac) * 25.4;
 
-            // Cálculo do Desvio/Tolerância Física Real para qualquer entrada que vá para Pol Fracionária
-            let valorRealFrac = parteInteira + (sessentaAvos / 64);
-            let desvio = (polegadaDecimal - valorRealFrac) * 25.4;
-
-            if (Math.abs(desvio) > 0.0001) {
                 explicacao += `<br>🔍 <strong>Análise de Tolerância Comercial:</strong><br>`;
-                explicacao += `• A fração encontrada (<code>${valorFinalStr}</code>) mede exatamente <code>${(valorRealFrac * 25.4).toFixed(4)} mm</code>.<br>`;
-                explicacao += `• <strong>Desvio/Sobra de Material:</strong> Diferença física real de <code>${desvio > 0 ? '+' : ''}${desvio.toFixed(4)} mm</code> em relação à medida real inserida.<br>`;
-            } else {
-                explicacao += `<br>🔍 <strong>Análise de Tolerância Comercial:</strong><br>• <strong>Aviso:</strong> Esta medida se alinha perfeitamente sem desvios a uma fração exata de mercado.<br>`;
+                explicacao += `• A fração comercial mais próxima é <code>${fracAproximada}</code> (que vale exatamente <code>${(valorRealFrac * 25.4).toFixed(4)} mm</code>).<br>`;
+                if (Math.abs(desvio) < 0.0001) {
+                    explicacao += `• <strong>Aviso:</strong> Esta medida corresponde perfeitamente a uma fração exata de mercado.<br>`;
+                } else {
+                    explicacao += `• <strong>Desvio/Sobra de Material:</strong> Diferença de <code>${desvio > 0 ? '+' : ''}${desvio.toFixed(4)} mm</code> em relação ao padrão físico.<br>`;
+                }
             }
         }
 
         outField.value = valorFinalStr;
         memContent.innerHTML = explicacao + `<br><strong>✓ Resultado Convertido:</strong> <code>${valorFinalStr}</code>`;
 
+        // Regista no histórico após 1.5 segundos sem digitação (debounce)
         clearTimeout(timeoutHistorico);
         timeoutHistorico = setTimeout(() => {
             adicionarAoHistorico(uLeft, polegadaDecimal, valorFinalStr);
@@ -556,10 +541,11 @@
             entradaTexto = `${i > 0 ? i + ' ' : ''}${n}/${d}"`;
         }
 
-        if (historico.length > 0 && historico[0].entrada === entradaTexto && historico[0].saida === stringDestino) return;
+        // Evita duplicados idênticos seguidos
+        if (historico.length > 0 && historico[0].entrada === entradaTexto) return;
 
         historico.unshift({ entrada: entradaTexto, saida: stringDestino });
-        if(historico.length > 5) historico.pop();
+        if(historico.length > 5) historico.pop(); // Mantém apenas os últimos 5
 
         const hBox = document.getElementById('history-box');
         let hHtml = `<ul class="history-list">`;
