@@ -10,28 +10,50 @@
         }
 
         :root {
-            --primary: #1a73e8;
-            --primary-hover: #1557b0;
-            --bg-page: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
-            --text-sub: #64748b;
-            --border: #e2e8f0;
-            --highlight: #e8f0fe;
+            /* Paleta Cyberpunk / Neon */
+            --primary: #00f0ff;          /* Neon Cyan */
+            --primary-hover: #00b8cc;
+            --secondary: #ff007f;        /* Neon Pink */
+            --bg-page: #0a0b10;          /* Deep Cyber Space */
+            --bg-card: #121420;          /* Dark Tech Box */
+            --text-main: #e2e8f0;        /* Off-White */
+            --text-sub: #707e94;         /* Dimmed Steel */
+            --border: #1e2640;           /* Tech Border */
+            --highlight: rgba(0, 240, 255, 0.15);
+            --neon-glow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.2);
+            --pink-glow: 0 0 10px rgba(ff, 0, 127, 0.5);
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Consolas', 'Courier New', system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 20px;
             background-color: var(--bg-page);
+            background-image: 
+                linear-gradient(rgba(18, 20, 32, 0.3) 50%, rgba(0, 0, 0, 0.5) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 6px 100%; /* Efeito Scanline sutil */
             color: var(--text-main);
             line-height: 1.5;
+        }
+
+        /* Animação de pulsação de energia interna */
+        @keyframes cyberPulse {
+            0% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.1); }
+            50% { box-shadow: 0 0 25px rgba(0, 240, 255, 0.3); }
+            100% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.1); }
+        }
+
+        @keyframes glitchText {
+            0% { text-shadow: 1px 1px 2px rgba(255,0,127,0.5); }
+            50% { text-shadow: -1px -1px 2px rgba(0,240,255,0.5); }
+            100% { text-shadow: 1px -1px 2px rgba(255,0,127,0.5); }
         }
 
         .container {
             max-width: 800px;
             margin: 20px auto;
+            position: relative;
         }
 
         /* Topo */
@@ -40,15 +62,19 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 24px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid var(--primary);
             padding-bottom: 16px;
+            box-shadow: 0 4px 10px -5px rgba(0, 240, 255, 0.5);
         }
 
         .header h1 {
-            font-size: 24px;
-            font-weight: 500;
+            font-size: 26px;
+            font-weight: 700;
             color: var(--primary);
             margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glitchText 3s infinite alternate;
         }
 
         /* Abas */
@@ -59,25 +85,32 @@
         }
 
         .tab-btn {
-            background: none;
-            border: none;
+            background: #181c30;
+            border: 1px solid var(--border);
             padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: bold;
             color: var(--text-sub);
             cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.2s;
+            border-radius: 0px; /* Bordas secas estilo industrial */
+            clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%); /* Corte chanfrado militar/sci-fi */
+            text-transform: uppercase;
+            transition: all 0.3s ease;
         }
 
         .tab-btn:hover {
-            background-color: #f1f5f9;
+            background-color: var(--border);
             color: var(--primary);
+            border-color: var(--primary);
         }
 
         .tab-btn.active {
             background-color: var(--highlight);
             color: var(--primary);
+            border: 1px solid var(--primary);
+            border-bottom: 1px solid transparent;
+            box-shadow: var(--neon-glow);
+            text-shadow: 0 0 5px var(--primary);
         }
 
         .tab-content {
@@ -92,10 +125,22 @@
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            border-radius: 0px 12px 12px 0px;
             padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
             margin-bottom: 20px;
+            position: relative;
+            animation: cyberPulse 6s infinite ease-in-out;
+        }
+        
+        .card::after {
+            content: "SYSTEM_OK";
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            font-size: 8px;
+            color: rgba(0, 240, 255, 0.3);
+            letter-spacing: 1px;
         }
 
         /* Zona do Conversor Inteligente */
@@ -122,21 +167,30 @@
             height: 52px;
             padding: 0 16px;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 4px;
             font-size: 16px;
-            color: var(--text-main);
-            background-color: #fff;
-            transition: border 0.2s;
+            color: #fff;
+            background-color: #0d0f1a;
+            font-family: 'Consolas', monospace;
+            transition: all 0.3s;
         }
 
         .field-box input:focus, .field-box select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+            box-shadow: var(--neon-glow);
+            background-color: #121526;
         }
 
         .select-unit {
             max-width: 220px;
+        }
+        
+        .select-unit select {
+            color: var(--primary);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 13px;
         }
 
         .fraction-row {
@@ -148,10 +202,13 @@
 
         .fraction-row select {
             height: 52px;
+            background-color: #0d0f1a;
+            color: #fff;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 4px;
             font-size: 16px;
             padding: 0 12px;
+            font-family: 'Consolas', monospace;
         }
 
         /* Botão Inverter */
@@ -163,49 +220,58 @@
         }
 
         .swap-btn {
-            background: #fff;
-            border: 1px solid var(--border);
-            width: 40px;
-            height: 40px;
+            background: #0d0f1a;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 0 5px rgba(255, 0, 127, 0.2);
             transition: all 0.2s;
         }
 
         .swap-btn:hover {
             border-color: var(--primary);
             color: var(--primary);
-            transform: scale(1.05);
+            box-shadow: var(--neon-glow);
+            transform: scale(1.1) rotate(180deg);
         }
 
         /* Memorial de Cálculo */
         .memorial-box {
-            background-color: #f8fafc;
-            border-left: 4px solid var(--primary);
-            border-radius: 4px;
+            background-color: #0d0f1a;
+            border-left: 4px solid var(--secondary);
+            border-radius: 0 4px 4px 0;
             padding: 16px;
             margin-top: 20px;
-            font-size: 14px;
+            font-size: 13px;
+            border: 1px solid rgba(255, 0, 127, 0.1);
+            border-left: 4px solid var(--secondary);
         }
 
         .memorial-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(255, 0, 127, 0.3);
         }
 
         code {
-            background: #fff;
+            background: #181c30;
             padding: 2px 6px;
             border: 1px solid var(--border);
             border-radius: 4px;
-            font-family: monospace;
+            font-family: 'Consolas', monospace;
             font-weight: bold;
-            color: #c2410c;
+            color: var(--primary);
         }
 
         /* Histórico */
@@ -218,22 +284,46 @@
         .history-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px 12px;
+            padding: 12px;
             border-bottom: 1px solid var(--border);
             font-size: 14px;
+            background: rgba(255,255,255,0.01);
+            margin-bottom: 4px;
+            border-radius: 4px;
+            transition: background 0.2s;
         }
         
-        .history-item:last-child { border: none; }
+        .history-item:hover {
+            background: rgba(0, 240, 255, 0.04);
+            border-color: rgba(0, 240, 255, 0.2);
+        }
+        
+        .history-item span strong {
+            color: var(--primary);
+            text-shadow: 0 0 3px rgba(0, 240, 255, 0.4);
+        }
+
+        .history-item:last-child { border-bottom: 1px solid var(--border); }
 
         /* Tabela e Busca */
         .search-bar {
             width: 100%;
             height: 46px;
             padding: 0 16px;
+            background-color: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 23px;
+            border-radius: 4px;
+            color: #fff;
+            font-family: 'Consolas', monospace;
             font-size: 15px;
             margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+        
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: var(--pink-glow);
         }
 
         .table-wrapper {
@@ -241,6 +331,22 @@
             overflow-y: auto;
             border: 1px solid var(--border);
             border-radius: 8px;
+            background: #0d0f1a;
+        }
+
+        /* Custom Scrollbar estilo Matrix/Cyber */
+        .table-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+        .table-wrapper::-webkit-scrollbar-track {
+            background: var(--bg-page);
+        }
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        .table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
         }
 
         table {
@@ -249,27 +355,37 @@
         }
 
         th {
-            background: #f1f5f9;
+            background: #141929;
             position: sticky;
             top: 0;
-            padding: 12px;
-            font-size: 12px;
-            color: var(--text-sub);
+            padding: 14px;
+            font-size: 11px;
+            color: var(--primary);
             text-transform: uppercase;
             text-align: left;
+            border-bottom: 2px solid var(--border);
+            letter-spacing: 1px;
         }
 
         td {
-            padding: 10px 12px;
+            padding: 12px;
             font-size: 14px;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--border);
             font-variant-numeric: tabular-nums;
+            color: #bbc7db;
+        }
+        
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+            color: #fff;
         }
 
         tr.row-inch td {
-            background-color: var(--highlight);
+            background-color: rgba(0, 240, 255, 0.08);
             font-weight: bold;
             color: var(--primary);
+            border-top: 1px solid rgba(0, 240, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
         }
 
         .text-right { text-align: right; }
@@ -281,8 +397,8 @@
 <div class="container">
     
     <div class="header">
-        <h1>Central Metrológica V4</h1>
-        <span style="font-size: 12px; color: var(--text-sub)">Alta Precisão Industrial</span>
+        <h1>Central Metrológica V4.5</h1>
+        <span style="font-size: 11px; color: var(--primary); letter-spacing: 1px; text-shadow: 0 0 3px var(--primary);">[ ALTA PRECISÃO INDUSTRIAL ]</span>
     </div>
 
     <div class="tabs">
@@ -301,7 +417,7 @@
                     <div class="fraction-row" id="box-fraction-left">
                         <select id="frac-int" onchange="calcularMetrologia()"></select>
                         <select id="frac-num" onchange="calcularMetrologia()"></select>
-                        <span style="font-weight: bold; color: var(--text-sub)">/</span>
+                        <span style="font-weight: bold; color: var(--secondary)">/</span>
                         <select id="frac-den" onchange="calcularMetrologia()"></select>
                     </div>
                     <div class="field-box select-unit">
@@ -319,7 +435,7 @@
 
                 <div class="input-group">
                     <div class="field-box">
-                        <input type="text" id="val-right" readonly style="background-color: #f8fafc; font-weight: 600;">
+                        <input type="text" id="val-right" readonly style="background-color: #090b14; font-weight: 600; color: var(--primary); border-color: rgba(0,240,255,0.3); text-shadow: 0 0 4px rgba(0,240,255,0.5);">
                     </div>
                     <div class="field-box select-unit">
                         <select id="unit-right" onchange="calcularMetrologia()">
@@ -469,7 +585,7 @@
                 let num = parseInt(partesBarra[0]) || 0;
                 let den = parseInt(partesBarra[1]) || 16;
                 
-                // Mapeia e ajusta o seletor para o denominador correto existente na interface
+                // Mapeia e ajusta o seletor para o denominator correto existente na interface
                 const dSel = document.getElementById('frac-den');
                 if ([2, 4, 8, 16, 32, 64].includes(den)) {
                     dSel.value = den;
