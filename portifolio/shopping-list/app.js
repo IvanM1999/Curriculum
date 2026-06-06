@@ -124,7 +124,7 @@ function exportarLista() {
   
   // Tenta copiar direto para a área de transferência para colar no WhatsApp
   navigator.clipboard.writeText(urlFinal).then(() => {
-    alert("Link de sincronização copiado! Só colar no WhatsApp da sua esposa/esposo.");
+    alert("Link de sincronização copiado! Só colar no WhatsApp da sua pessoa favorita.");
   }).catch(() => {
     // Caso o navegador bloqueie a cópia automática por segurança
     prompt("Copie o link abaixo para enviar:", urlFinal);
