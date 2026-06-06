@@ -7,7 +7,11 @@ const alertaEl = document.getElementById('alerta');
 const listEl = document.getElementById('list');
 const remainingEl = document.getElementById('remaining');
 
+// Carrega os itens salvos e o último orçamento definido
 let items = JSON.parse(localStorage.getItem('items_simple')) || [];
+if (budgetInput) {
+  budgetInput.value = localStorage.getItem('budget_simple') || '';
+}
 
 function addItem(){
   if(!nameInput.value.trim()) return;
@@ -16,13 +20,14 @@ function addItem(){
     name: nameInput.value.trim(),
     price: parseFloat(priceInput.value) || 0,
     qty: parseFloat(qtyInput.value) || 1,
-    active: true, 
+    active: true, // Já inicia ativado para somar imediatamente
     selected: false
   };
 
   items.push(item);
   save();
 
+  // Limpa os campos do formulário
   nameInput.value = '';
   priceInput.value = '';
   qtyInput.value = '';
@@ -99,10 +104,21 @@ function calc(){
 
 function save(){
   localStorage.setItem('items_simple', JSON.stringify(items));
+  if (budgetInput) {
+    localStorage.setItem('budget_simple', budgetInput.value);
+  }
+}
+
+// Ouve as mudanças no input do orçamento para salvar e recalcular na hora
+if (budgetInput) {
+  budgetInput.addEventListener('input', () => {
+    save();
+    calc();
+  });
 }
 
 // ==========================================
-//  NOVA FUNÇÃO: EXPORTAR E IMPORTAR (SINCRONIZAR)
+//  SISTEMA ROBUSTO: EXPORTAR E IMPORTAR (SINC)
 // ==========================================
 
 function exportarLista() {
@@ -111,24 +127,28 @@ function exportarLista() {
     return;
   }
   
-  // Transforma a lista e o orçamento atual em texto codificado (Base64 seguro para URL)
   const dados = {
     lista: items,
     orcamento: budgetInput.value
   };
-  const stringDados = JSON.stringify(dados);
-  const hash = btoa(encodeURIComponent(stringDados));
-  
-  // Monta o link final usando a URL atual do navegador
-  const urlFinal = window.location.origin + window.location.pathname + '?sync=' + hash;
-  
-  // Tenta copiar direto para a área de transferência para colar no WhatsApp
-  navigator.clipboard.writeText(urlFinal).then(() => {
-    alert("Link de sincronização copiado! Só colar no WhatsApp da sua pessoa favorita.");
-  }).catch(() => {
-    // Caso o navegador bloqueie a cópia automática por segurança
-    prompt("Copie o link abaixo para enviar:", urlFinal);
-  });
+
+  try {
+    const stringDados = JSON.stringify(dados);
+    // Suporte universal a acentos e caracteres complexos (escapando a string antes do Base64)
+    const hashBase64 = btoa(unescape(encodeURIComponent(stringDados)));
+    const hashSeguro = encodeURIComponent(hashBase64);
+    
+    const urlFinal = window.location.origin + window.location.pathname + '?sync=' + hashSeguro;
+    
+    navigator.clipboard.writeText(urlFinal).then(() => {
+      alert("Link de sincronização copiado com sucesso! Compartilhe via WhatsApp.");
+    }).catch(() => {
+      prompt("Cópia automática bloqueada. Copie manualmente o link abaixo:", urlFinal);
+    });
+  } catch (erro) {
+    alert("Falha ao compactar os dados da lista.");
+    console.error(erro);
+  }
 }
 
 function verificarImportacao() {
@@ -137,52 +157,45 @@ function verificarImportacao() {
   
   if (syncHash) {
     try {
-      // Decodifica o texto do link trazido da URL
-      const stringDados = decodeURIComponent(atob(syncHash));
+      // Reverte o tratamento de caracteres especiais de maneira limpa
+      const stringDados = decodeURIComponent(escape(atob(syncHash)));
       const dadosImportados = JSON.parse(stringDados);
       
       if (dadosImportados && Array.isArray(dadosImportados.lista)) {
-        if (confirm("Deseja sincronizar e mesclar a lista recebida com a sua atual?")) {
+        if (confirm("Deseja sincronizar e mesclar os dados recebidos com a sua lista atual?")) {
           
-          // Aplica o orçamento recebido se o seu estiver zerado
-          if (!budgetInput.value && dadosImportados.orcamento) {
+          if (dadosImportados.orcamento) {
             budgetInput.value = dadosImportados.orcamento;
           }
           
-          // Inteligência de Mesclagem:
           dadosImportados.lista.forEach(itemImportado => {
-            // Procura se o item já existe na sua lista (pelo nome)
             const itemExistente = items.find(i => i.name.toLowerCase() === itemImportado.name.toLowerCase());
             
             if (itemExistente) {
-              // Se ela já marcou que pegou o item (active mudou) ou mudou o preço, atualiza o seu
+              // Mescla o estado dinâmico mantendo integridade
               itemExistente.active = itemImportado.active;
               itemExistente.price = itemImportado.price;
               itemExistente.qty = itemImportado.qty;
             } else {
-              // Se for um item novo que ela adicionou no meio do caminho, insere na sua lista
               items.push(itemImportado);
             }
           });
           
           save();
-          
-          // Limpa o link da barra de endereço para não ficar importando toda vez que atualizar a página
-          window.history.replaceState({}, document.title, window.location.pathname);
-          
-          alert("Sincronizado com sucesso!");
-          render();
+          alert("Lista sincronizada com sucesso!");
         }
       }
     } catch (e) {
-      alert("Erro ao ler o link de sincronização. Verifique se o link foi copiado por completo.");
+      console.error("Erro na importação:", e);
+      alert("Não foi possível ler este link de sincronização. Certifique-se de que ele não foi cortado no envio.");
+    } finally {
+      // Sempre remove o hash da barra de endereços para manter a URL limpa e responsiva
+      window.history.replaceState({}, document.title, window.location.pathname);
+      render();
     }
   }
 }
 
-budgetInput.addEventListener('input', calc);
-
-// Verifica se há alguma lista recebida por link logo ao abrir a página
+// Execução inicial do app
 verificarImportacao();
-
 render();
