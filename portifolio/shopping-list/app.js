@@ -20,14 +20,13 @@ function addItem(){
     name: nameInput.value.trim(),
     price: parseFloat(priceInput.value) || 0,
     qty: parseFloat(qtyInput.value) || 1,
-    active: true, // Já inicia ativado para somar imediatamente
+    active: true, // Inicia ativado (calculando no total)
     selected: false
   };
 
   items.push(item);
   save();
 
-  // Limpa os campos do formulário
   nameInput.value = '';
   priceInput.value = '';
   qtyInput.value = '';
@@ -98,7 +97,7 @@ function calc(){
     alertaEl.classList.add('visible');
   } else {
     alertaEl.innerText = '';
-    alertaEl.classList.remove('visible');
+    alertaEl.remove('visible');
   }
 }
 
@@ -109,7 +108,6 @@ function save(){
   }
 }
 
-// Ouve as mudanças no input do orçamento para salvar e recalcular na hora
 if (budgetInput) {
   budgetInput.addEventListener('input', () => {
     save();
@@ -118,7 +116,7 @@ if (budgetInput) {
 }
 
 // ==========================================
-//  SISTEMA DE SINCRONIZAÇÃO BLINDADO
+//  SISTEMA DE SINCRONIZAÇÃO INTELIGENTE MÃO DUPLA
 // ==========================================
 
 function exportarLista() {
@@ -134,14 +132,15 @@ function exportarLista() {
 
   try {
     const stringDados = JSON.stringify(dados);
-    // Cria o Base64 aplicando escape preventivo para acentos
+    // Codificação estável para caracteres especiais e acentos
     const hashBase64 = btoa(unescape(encodeURIComponent(stringDados)));
     const hashSeguro = encodeURIComponent(hashBase64);
     
+    // Captura o domínio atual dinamicamente (não importa se mudar o domínio ou pasta)
     const urlFinal = window.location.origin + window.location.pathname + '?sync=' + hashSeguro;
     
     navigator.clipboard.writeText(urlFinal).then(() => {
-      alert("Link de sincronização copiado com sucesso! Compartilhe via WhatsApp.");
+      alert("Link atualizado copiado! Envie para o outro dispositivo sincronizar.");
     }).catch(() => {
       prompt("Cópia automática bloqueada. Copie manualmente o link abaixo:", urlFinal);
     });
@@ -158,54 +157,71 @@ function verificarImportacao() {
   if (syncHash) {
     let dadosImportados = null;
 
-    // TENTATIVA 1: Tenta ler no formato novo blindado (com suporte a acentos)
+    // Tentativa 1: Decodificação avançada UTF-8
     try {
       const stringDados = decodeURIComponent(escape(atob(syncHash)));
       dadosImportados = JSON.parse(stringDados);
     } catch (e1) {
-      // TENTATIVA 2: Se falhar (como no link antigo que você enviou), tenta ler o Base64 puro direto
+      // Tentativa 2: Fallback para formato Base64 tradicional
       try {
         const stringDadosAlternativa = decodeURIComponent(atob(syncHash));
         dadosImportados = JSON.parse(stringDadosAlternativa);
       } catch (e2) {
-        console.error("Ambos os métodos de decodificação falharam:", e2);
+        console.error("Erro crítico na decodificação dos parâmetros da URL:", e2);
       }
     }
     
-    // Se conseguiu decodificar por qualquer um dos dois métodos, processa a lista
+    // Se conseguimos decodificar a estrutura com sucesso
     if (dadosImportados && Array.isArray(dadosImportados.lista)) {
-      if (confirm("Deseja sincronizar e mesclar os dados recebidos com a sua lista atual?")) {
+      if (confirm("Deseja sincronizar e mesclar as alterações feitas no outro dispositivo?")) {
         
         if (dadosImportados.orcamento) {
           budgetInput.value = dadosImportados.orcamento;
         }
         
-        dadosImportados.lista.forEach(itemImportado => {
-          const itemExistente = items.find(i => i.name.toLowerCase() === itemImportado.name.toLowerCase());
-          
-          if (itemExistente) {
-            // Mescla o progresso sem duplicar itens repetidos
-            itemExistente.active = itemImportado.active;
-            itemExistente.price = itemImportado.price;
-            itemExistente.qty = itemImportado.qty;
-          } else {
-            items.push(itemImportado);
-          }
-        });
+        if (items.length === 0) {
+          items = dadosImportados.lista;
+        } else {
+          // FUSÃO INTELIGENTE MÃO DUPLA:
+          dadosImportados.lista.forEach(itemImportado => {
+            const indexExistente = items.findIndex(i => i.name.toLowerCase() === itemImportado.name.toLowerCase());
+            
+            if (indexExistente !== -1) {
+              // Item comum: Atualiza o status atual (ativo/inativo, valor, quantidade)
+              items[indexExistente].active = itemImportado.active;
+              items[indexExistente].price = itemImportado.price;
+              items[indexExistente].qty = itemImportado.qty;
+            } else {
+              // Item novo: Insere na lista local
+              items.push(itemImportado);
+            }
+          });
+
+          // Filtra itens deletados no outro dispositivo
+          items = items.filter(itemLocal => {
+            const existiaNoEnvio = dadosImportados.lista.some(i => i.name.toLowerCase() === itemLocal.name.toLowerCase());
+            if (existiaNoEnvio) {
+              return dadosImportados.lista.some(i => i.name.toLowerCase() === itemLocal.name.toLowerCase());
+            }
+            return true; 
+          });
+        }
         
         save();
         alert("Lista sincronizada com sucesso!");
       }
     } else {
-      alert("Não foi possível ler este link de sincronização. Certifique-se de que ele não foi cortado no envio.");
+      alert("Link de sincronização inválido ou corrompido.");
     }
 
-    // Limpa o hash da URL de qualquer forma para não ficar dando loops/prompts ao atualizar a página
-    window.history.replaceState({}, document.title, window.location.pathname);
-    render();
+    // REDIRECIONAMENTO INTELIGENTE:
+    // Redireciona o navegador para a URL Pai limpa (sem o '?sync=...')
+    // window.location.origin pega o protocolo+domínio (ex: https://ivanmontibeller.onrender.com)
+    // window.location.pathname pega as subpastas corretas (ex: /portifolio/shopping-list/index.html)
+    window.location.href = window.location.origin + window.location.pathname;
   }
 }
 
-// Execução inicial do app ao abrir a página
+// Inicialização automática do aplicativo
 verificarImportacao();
 render();
