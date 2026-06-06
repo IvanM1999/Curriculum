@@ -43,13 +43,8 @@ body {
   z-index: 100;
 }
 
-.brutal-border-left {
-  left: 0;
-}
-
-.brutal-border-right {
-  right: 0;
-}
+.brutal-border-left { left: 0; }
+.brutal-border-right { right: 0; }
 
 header {
   background: var(--yellow);
@@ -96,21 +91,8 @@ header::after {
   opacity: 0.15;
 }
 
-.dec-1 {
-  width: 60px;
-  height: 60px;
-  top: 15%;
-  left: 5%;
-  animation: decoSpin 8s linear infinite;
-}
-
-.dec-2 {
-  width: 40px;
-  height: 40px;
-  top: 20%;
-  right: 8%;
-  animation: decoSpin 6s linear infinite reverse;
-}
+.dec-1 { width: 60px; height: 60px; top: 15%; left: 5%; animation: decoSpin 8s linear infinite; }
+.dec-2 { width: 40px; height: 40px; top: 20%; right: 8%; animation: decoSpin 6s linear infinite reverse; }
 
 .deco-line {
   position: absolute;
@@ -131,17 +113,8 @@ header::after {
   opacity: 0.12;
 }
 
-.dec-4 {
-  top: 25%;
-  left: 15%;
-  animation: decoPulse 2s ease-in-out infinite;
-}
-
-.dec-5 {
-  top: 30%;
-  right: 12%;
-  animation: decoPulse 2.5s ease-in-out infinite 0.5s;
-}
+.dec-4 { top: 25%; left: 15%; animation: decoPulse 2s ease-in-out infinite; }
+.dec-5 { top: 30%; right: 12%; animation: decoPulse 2.5s ease-in-out infinite 0.5s; }
 
 .deco-text {
   position: absolute;
@@ -157,51 +130,17 @@ header::after {
 
 .deco-stripe {
   position: absolute;
-  background: repeating-linear-gradient(
-    45deg,
-    var(--black),
-    var(--black) 2px,
-    transparent 2px,
-    transparent 8px
-  );
+  background: repeating-linear-gradient(45deg, var(--black), var(--black) 2px, transparent 2px, transparent 8px);
   opacity: 0.1;
 }
 
-.dec-7 {
-  width: 12px;
-  height: 120px;
-  top: 10%;
-  right: 25%;
-  animation: decoStripe 3s ease-in-out infinite;
-}
+.dec-7 { width: 12px; height: 120px; top: 10%; right: 25%; animation: decoStripe 3s ease-in-out infinite; }
+.dec-8 { width: 12px; height: 80px; bottom: 15%; left: 20%; animation: decoStripe 2.5s ease-in-out infinite 0.5s; }
 
-.dec-8 {
-  width: 12px;
-  height: 80px;
-  bottom: 15%;
-  left: 20%;
-  animation: decoStripe 2.5s ease-in-out infinite 0.5s;
-}
-
-@keyframes decoStripe {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(20px); }
-}
-
-@keyframes decoSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes decoSlide {
-  0%, 100% { transform: translateY(0); opacity: 0.15; }
-  50% { transform: translateY(30px); opacity: 0.25; }
-}
-
-@keyframes decoPulse {
-  0%, 100% { transform: scale(1); opacity: 0.12; }
-  50% { transform: scale(1.3); opacity: 0.2; }
-}
+@keyframes decoStripe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(20px); } }
+@keyframes decoSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes decoSlide { 0%, 100% { transform: translateY(0); opacity: 0.15; } 50% { transform: translateY(30px); opacity: 0.25; } }
+@keyframes decoPulse { 0%, 100% { transform: scale(1); opacity: 0.12; } 50% { transform: scale(1.3); opacity: 0.2; } }
 
 .header-content {
   max-width: 880px;
@@ -230,15 +169,16 @@ header h1 {
 .container {
   max-width: 880px;
   margin: 0 auto;
-  padding: 32px 16px 48px;
+  padding: 24px 16px 48px;
 }
 
+/* Reduzido drasticamente o preenchimento vertical dos cards */
 .card {
   background: var(--white);
   border: var(--border);
   box-shadow: var(--shadow);
-  padding: 28px;
-  margin-bottom: 28px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
   transition: all var(--transition);
 }
 
@@ -248,33 +188,33 @@ header h1 {
 }
 
 .card h2 {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
   border-bottom: var(--border);
 }
 
 .input-group {
-  margin-bottom: 12px;
+  margin-bottom: 0px;
 }
 
 .input-group label {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 input[type="number"],
 input[type="text"] {
   width: 100%;
-  padding: 12px 16px;
-  font-size: 15px;
+  padding: 8px 12px;
+  font-size: 14px;
   border: var(--border);
   background: var(--white);
   color: var(--black);
@@ -307,8 +247,9 @@ input::placeholder {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
+
 
 .summary {
   display: grid;
