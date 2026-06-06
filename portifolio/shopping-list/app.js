@@ -118,7 +118,7 @@ if (budgetInput) {
 }
 
 // ==========================================
-//  SISTEMA ROBUSTO: EXPORTAR E IMPORTAR (SINC)
+//  SISTEMA DE SINCRONIZAÇÃO BLINDADO
 // ==========================================
 
 function exportarLista() {
@@ -134,7 +134,7 @@ function exportarLista() {
 
   try {
     const stringDados = JSON.stringify(dados);
-    // Suporte universal a acentos e caracteres complexos (escapando a string antes do Base64)
+    // Cria o Base64 aplicando escape preventivo para acentos
     const hashBase64 = btoa(unescape(encodeURIComponent(stringDados)));
     const hashSeguro = encodeURIComponent(hashBase64);
     
@@ -156,46 +156,56 @@ function verificarImportacao() {
   const syncHash = urlParams.get('sync');
   
   if (syncHash) {
+    let dadosImportados = null;
+
+    // TENTATIVA 1: Tenta ler no formato novo blindado (com suporte a acentos)
     try {
-      // Reverte o tratamento de caracteres especiais de maneira limpa
       const stringDados = decodeURIComponent(escape(atob(syncHash)));
-      const dadosImportados = JSON.parse(stringDados);
-      
-      if (dadosImportados && Array.isArray(dadosImportados.lista)) {
-        if (confirm("Deseja sincronizar e mesclar os dados recebidos com a sua lista atual?")) {
-          
-          if (dadosImportados.orcamento) {
-            budgetInput.value = dadosImportados.orcamento;
-          }
-          
-          dadosImportados.lista.forEach(itemImportado => {
-            const itemExistente = items.find(i => i.name.toLowerCase() === itemImportado.name.toLowerCase());
-            
-            if (itemExistente) {
-              // Mescla o estado dinâmico mantendo integridade
-              itemExistente.active = itemImportado.active;
-              itemExistente.price = itemImportado.price;
-              itemExistente.qty = itemImportado.qty;
-            } else {
-              items.push(itemImportado);
-            }
-          });
-          
-          save();
-          alert("Lista sincronizada com sucesso!");
-        }
+      dadosImportados = JSON.parse(stringDados);
+    } catch (e1) {
+      // TENTATIVA 2: Se falhar (como no link antigo que você enviou), tenta ler o Base64 puro direto
+      try {
+        const stringDadosAlternativa = decodeURIComponent(atob(syncHash));
+        dadosImportados = JSON.parse(stringDadosAlternativa);
+      } catch (e2) {
+        console.error("Ambos os métodos de decodificação falharam:", e2);
       }
-    } catch (e) {
-      console.error("Erro na importação:", e);
-      alert("Não foi possível ler este link de sincronização. Certifique-se de que ele não foi cortado no envio.");
-    } finally {
-      // Sempre remove o hash da barra de endereços para manter a URL limpa e responsiva
-      window.history.replaceState({}, document.title, window.location.pathname);
-      render();
     }
+    
+    // Se conseguiu decodificar por qualquer um dos dois métodos, processa a lista
+    if (dadosImportados && Array.isArray(dadosImportados.lista)) {
+      if (confirm("Deseja sincronizar e mesclar os dados recebidos com a sua lista atual?")) {
+        
+        if (dadosImportados.orcamento) {
+          budgetInput.value = dadosImportados.orcamento;
+        }
+        
+        dadosImportados.lista.forEach(itemImportado => {
+          const itemExistente = items.find(i => i.name.toLowerCase() === itemImportado.name.toLowerCase());
+          
+          if (itemExistente) {
+            // Mescla o progresso sem duplicar itens repetidos
+            itemExistente.active = itemImportado.active;
+            itemExistente.price = itemImportado.price;
+            itemExistente.qty = itemImportado.qty;
+          } else {
+            items.push(itemImportado);
+          }
+        });
+        
+        save();
+        alert("Lista sincronizada com sucesso!");
+      }
+    } else {
+      alert("Não foi possível ler este link de sincronização. Certifique-se de que ele não foi cortado no envio.");
+    }
+
+    // Limpa o hash da URL de qualquer forma para não ficar dando loops/prompts ao atualizar a página
+    window.history.replaceState({}, document.title, window.location.pathname);
+    render();
   }
 }
 
-// Execução inicial do app
+// Execução inicial do app ao abrir a página
 verificarImportacao();
 render();
