@@ -418,6 +418,118 @@
 
     </main>
 </div>
+<footer style="background-color: #1a1a1a; border-top: 1px solid #333333; padding: 24px 16px; font-family: 'Ubuntu', sans-serif; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; box-sizing: border-box; width: 100%;">
+    
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 24px; width: 100%;">
+        
+        <span id="html-footer-ubuntu-btn" style="background: rgba(233, 84, 32, 0.15); color: #E95420; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; transition: background 0.2s; user-select: none;">
+            <i class="fa-brands fa-ubuntu"></i> Ubuntu system core
+        </span>
+        
+        <span style="color: #aea79f; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-code-branch" style="color: #E95420;"></i> v0.8.0-beta (Release 8)
+        </span>
+
+        <a href="https://github.com/IvanM1999/Curriculum/tree/main/portifolio%2Findustrial%2Fsenai" 
+           target="_blank" 
+           style="display: inline-flex; align-items: center; gap: 8px; background: #24292e; color: #ffffff; text-decoration: none; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; border: 1px solid #444; transition: opacity 0.2s;">
+            <i class="fa-brands fa-github" style="font-size: 14px;"></i> GitHub Projeto
+        </a>
+    </div>
+
+    <div style="width: 100%; max-width: 650px; height: 1px; background: #2e2e2e;"></div>
+
+    <div style="font-size: 12px; color: #888888;">
+        Desenvolvido por 
+        <span id="html-footer-empresa-destiny" style="color: #ffffff; font-weight: 600; cursor: help; border-bottom: 1px dashed #E95420; padding-bottom: 2px; position: relative;">
+            DestinyServicesBR
+        </span>
+    </div>
+
+    <script>
+        (function() {
+            // Estilos CSS dinâmicos necessários para as animações dos Popovers
+            if (!document.getElementById('html-footer-animations')) {
+                const style = document.createElement('style');
+                style.id = 'html-footer-animations';
+                style.innerHTML = `@keyframes footerFadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }`;
+                document.head.appendChild(style);
+            }
+
+            // --- 1. SIGNIFICADO DO BOTÃO UBUNTU ---
+            const btnUbuntu = document.getElementById('html-footer-ubuntu-btn');
+            if (btnUbuntu) {
+                btnUbuntu.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const popoverExistente = document.getElementById('html-ubuntu-popover');
+                    if (popoverExistente) { popoverExistente.remove(); return; }
+
+                    const rect = btnUbuntu.getBoundingClientRect();
+                    const popover = document.createElement('div');
+                    popover.id = 'html-ubuntu-popover';
+                    popover.style.cssText = `
+                        position: fixed; bottom: ${window.innerHeight - rect.top + 10}px; left: ${Math.max(10, rect.left - 40)}px;
+                        background: #77216F; color: #ffffff; padding: 10px 14px; border-radius: 4px; max-width: 260px;
+                        box-shadow: 0 -4px 15px rgba(0,0,0,0.5); font-family: 'Ubuntu', sans-serif; font-size: 12px; line-height: 1.4;
+                        border-bottom: 4px solid #E95420; z-index: 1000000; animation: footerFadeUp 0.2s ease-out;
+                    `;
+                    popover.innerHTML = `<strong>Significado:</strong> Filosofia de origem sul-africana baseada na premissa <em>"Eu sou porque nós somos"</em>. Traduz a importância da coletividade e cooperação mútua.`;
+                    document.body.appendChild(popover);
+
+                    const fecharMundo = function(evt) {
+                        if (!popover.contains(evt.target) && evt.target !== btnUbuntu) {
+                            popover.remove();
+                            document.removeEventListener('click', fecharMundo);
+                        }
+                    };
+                    setTimeout(() => document.addEventListener('click', fecharMundo), 10);
+                });
+            }
+
+            // --- 2. EXIBIÇÃO DO CNPJ (DESTINYSERVICESBR) ---
+            const empresaSpan = document.getElementById('html-footer-empresa-destiny');
+            if (empresaSpan) {
+                const cnpjTexto = "45.609.430/0001-43";
+                empresaSpan.setAttribute('title', `CNPJ: ${cnpjTexto}`);
+
+                const renderTooltip = function() {
+                    let tooltip = document.getElementById('html-cnpj-tooltip');
+                    if (!tooltip) {
+                        tooltip = document.createElement('div');
+                        tooltip.id = 'html-cnpj-tooltip';
+                        tooltip.style.cssText = `
+                            position: fixed; background: #222222; color: #ffffff;
+                            padding: 6px 12px; border-radius: 4px; font-size: 11px;
+                            border: 1px solid #E95420; box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+                            z-index: 1000001; pointer-events: none; font-weight: bold;
+                            font-family: monospace; animation: footerFadeUp 0.15s ease-out;
+                        `;
+                        tooltip.innerHTML = `<i class="fa-solid fa-id-card" style="color: #E95420;"></i> CNPJ: ${cnpjTexto}`;
+                        document.body.appendChild(tooltip);
+                    }
+                    const bounding = empresaSpan.getBoundingClientRect();
+                    tooltip.style.top = `${bounding.top - 38}px`;
+                    tooltip.style.left = `${bounding.left + (bounding.width / 2) - (tooltip.offsetWidth / 2)}px`;
+                };
+
+                const destruirTooltip = function() {
+                    const tooltip = document.getElementById('html-cnpj-tooltip');
+                    if (tooltip) tooltip.remove();
+                };
+
+                // Gatilhos unificados para Hover e Dispositivos Touch/Clique
+                empresaSpan.addEventListener('mouseenter', renderTooltip);
+                empresaSpan.addEventListener('mousemove', renderTooltip);
+                empresaSpan.addEventListener('mouseleave', destruirTooltip);
+                empresaSpan.addEventListener('click', function(ev) {
+                    ev.stopPropagation();
+                    renderTooltip();
+                    setTimeout(destruirTooltip, 3500); // Auto-oculta em telas touch
+                });
+            }
+        })();
+    </script>
+</footer>
 
 <script>
 /**
@@ -666,5 +778,5 @@ window.addEventListener('DOMContentLoaded', () => {
     engineCalculos.gerarTemplateSCL();
 });
 </script>
-</body>
+</body> 
 </html>
