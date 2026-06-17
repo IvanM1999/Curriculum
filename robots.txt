@@ -9,7 +9,7 @@ Disallow: /admin/
 Disallow: /private/
 
 # Sitemap
-Sitemap: https://ivanmontibeller.dev/sitemap.xml
+Sitemap: https://ivanmontibeller.onrender.com/sitemap.xml
 
 # Crawl delay to prevent server overload
 Crawl-delay: 1
